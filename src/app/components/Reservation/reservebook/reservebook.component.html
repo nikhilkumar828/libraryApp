@@ -1,4 +1,3 @@
-<div *ngIf="books.length else noBooks">
         <div class="container">
           <div class="card" style="width: 70rem;" *ngFor="let books of books">
             <img class="card-img-top rounded imgSize " src="{{books.imgURL}}" alt="Card image cap">
@@ -10,15 +9,16 @@
               <li class="list-group-item">ISBN Number: {{books.isbn}}</li>
               <li class="list-group-item">Author Name: {{books.author}}</li>
               <li class="list-group-item">Release Date: {{books.releaseDate}}</li>
-              <li class="list-group-item">Issue Date: {{books.issueDate}}</li>
-              <li class="list-group-item">Return Date: {{books.returnDate}}</li>
+              <li class="list-group-item">Issue Date:<input [matDatepicker]="startDatepicker" [min]="minDate" [max]="maxDate">
+                <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #startDatepicker ></mat-datepicker> </li>
+              <li class="list-group-item">Return Date:<input [matDatepicker]="endDatepicker" [min]="minDate" [max]="maxDate">
+                <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #endDatepicker></mat-datepicker>  </li>
             </ul>
             <div class="card-body">
               <button (click)="returnBook(books.isbn)" class="btn btn-primary">Return Book</button>
             </div>
           </div>
         </div>
-      </div>
-      <ng-template #noBooks>
-        <h2 class="container text-center font-italic text-info">No books reserved!!</h2>
-      </ng-template>
+      

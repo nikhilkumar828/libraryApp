@@ -1,24 +1,29 @@
-        <div class="container">
-          <div class="card" style="width: 70rem;" *ngFor="let books of books">
-            <img class="card-img-top rounded imgSize " src="{{books.imgURL}}" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{books.title}}</h5>
-              <p class="card-text">{{books.desc}}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">ISBN Number: {{books.isbn}}</li>
-              <li class="list-group-item">Author Name: {{books.author}}</li>
-              <li class="list-group-item">Release Date: {{books.releaseDate}}</li>
-              <li class="list-group-item">Issue Date:<input [matDatepicker]="startDatepicker" [min]="minDate" [max]="maxDate">
-                <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
-                <mat-datepicker #startDatepicker ></mat-datepicker> </li>
-              <li class="list-group-item">Return Date:<input [matDatepicker]="endDatepicker" [min]="minDate" [max]="maxDate">
-                <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
-                <mat-datepicker #endDatepicker></mat-datepicker>  </li>
-            </ul>
-            <div class="card-body">
-              <button (click)="returnBook(books.isbn)" class="btn btn-primary">Return Book</button>
-            </div>
-          </div>
-        </div>
-      
+<div class="container">
+  <div class="card" style="width: 70rem;" *ngFor="let books of books">
+    <img class="card-img-top rounded imgSize " src="{{books.imgURL}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{books.title}}</h5>
+      <p class="card-text">{{books.desc}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">ISBN Number: {{books.isbn}}</li>
+      <li class="list-group-item">Author Name: {{books.author}}</li>
+      <li class="list-group-item">Release Date: {{books.releaseDate}}</li>
+      <li class="list-group-item">Issue Date:<input [matDatepicker]="startDatepicker" [min]="issueMinDate"
+          (dateInput)="setIssueDate($event.value)">
+        <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatepicker></mat-datepicker>
+      </li>
+      <li class="list-group-item">Return Date:<input [matDatepicker]="endDatepicker" [min]="returnMinDate"
+          [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)">
+        <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatepicker></mat-datepicker>
+      </li>
+    </ul>
+    <div class="card-body">
+      <button (click)="reserveBook()" class="btn btn-primary">Reserve Book</button>
+    </div>
+  </div>
+</div>
+
+

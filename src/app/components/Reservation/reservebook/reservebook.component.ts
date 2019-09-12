@@ -10,22 +10,38 @@ export class ReservebookComponent implements OnInit {
 
   constructor(private reservationService: ReservationService) { }
   books: any = [];
-  myDate: Date;
-  minDate: Date;
-  maxDate: Date;
+  myDate: Date=new Date();
+  issueMinDate;
+  returnMinDate;
+  returnMaxDate;
   ngOnInit() {
-    this.myDate = new Date();
-    this.minDate = new Date(
+      this.issueMinDate = new Date(
       this.myDate.getFullYear(),
       this.myDate.getMonth(),
       this.myDate.getDate());
-    this.maxDate = new Date(
+      this.returnMinDate = new Date(
       this.myDate.getFullYear(),
-      this.myDate.getMonth() ,
-      this.myDate.getDate() + 10);
-    this.books = this.reservationService.getReservedBooks('user1');
-    console.log(this.books);
+      this.myDate.getMonth(),
+      this.myDate.getDate());
+      this.books = this.reservationService.getReservedBooks('user1');
   }
+setIssueDate(event:any){
+this.returnMinDate=event;
+this.returnMaxDate=new Date(
+  event.getFullYear(),
+  event.getMonth(),
+  event.getDate()+14
+);
+this.reservationService.books[0].issueDate=event.getMonth()+1+"/"+event.getDate()+"/"+event.getFullYear();
+}
 
+setReturnDate(event:any){
+  this.reservationService.books[0].returnDate=event.getMonth()+1+"/"+event.getDate()+"/"+event.getFullYear();
+}
+
+reserveBook(isbn:string){
+console.log("book reserved");
+console.log(this.books)
+}
 
 }

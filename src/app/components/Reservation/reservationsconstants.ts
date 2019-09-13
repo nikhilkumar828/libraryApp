@@ -9,5 +9,5 @@ DIVIDER : ':',
 RETURN_BOOK : 'Return Book',
 NO_BOOKS : 'No books reserved!!',
 RESERVE_BOOK : 'Reserve Book',
-
+MY_RESERVATIONS : 'My Reservations ',
 };

@@ -1,0 +1,73 @@
+<div class="row justify-content-center align-items-center" #card>
+        <div class="col-md-4 mx-auto">
+            <div class="card mt-5">
+                <div class="d-flex justify-content-center">
+                    <div class="brand_logo_container">
+                        <img src="../../../../assets/logo.png" class="brand_logo" alt="Logo">
+                    </div>
+                </div>
+                <div class="card-header bg-dark text-white">
+                    <h4>Sign In</h4>
+                </div>
+                <div class="card-body">
+                    <form class="margin-form" [formGroup]="loginForm"  (ngSubmit)="login()">
+                        <div class="form-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-dark text-white">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Email" 
+                                    name="email"
+                                    formControlName="email">
+                            </div>
+                            <span 
+                                class="help-block" 
+                                *ngIf="(!loginForm.get('email').valid && loginForm.get('email').touched) && loginForm.get('email').value === null">
+                                Enter email
+                            </span>
+                            <span 
+                                class="help-block" 
+                                *ngIf="(!loginForm.get('email').valid && loginForm.get('email').touched) && loginForm.get('email').value !== null">
+                                Enter valid email
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-dark text-white">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                </div>
+                                <input 
+                                    type="password" 
+                                    class="form-control" 
+                                    placeholder="Password" 
+                                    name="password" 
+                                    autocomplete="false"
+                                    formControlName="password">
+                            </div>
+                            <span 
+                                class="help-block" 
+                                *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+                                Enter password
+                            </span>
+                        </div>
+                        <button 
+                            type="submit" 
+                            class="btn btn-dark form-control mt-2"
+                        >Sign In</button>
+                        
+                        <app-alert 
+                            *ngIf="errorData"
+                            [errorData]="errorData">
+                        </app-alert>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

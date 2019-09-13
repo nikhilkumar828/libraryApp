@@ -4,3 +4,11 @@
     align-self: center;
     margin: 2rem 0 0 0;
 }
+
+.text-color{
+    color: #003366;
+}
+
+.background{
+    background: #003366;
+}

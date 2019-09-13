@@ -1,5 +1,6 @@
 <div *ngIf="books.length else noBooks">
   <div class="container">
+      <h2 class="text-center font-italic text-color">{{reservation.MY_RESERVATIONS}}</h2>
     <div class="card" style="width: 70rem;" *ngFor="let books of books">
       <img class="card-img-top rounded imgSize " src="{{books.imgURL}}" alt="Card image cap">
       <div class="card-body">
@@ -14,11 +15,11 @@
         <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.returnDate}}</li>
       </ul>
       <div class="card-body">
-        <button (click)="returnBook(books.isbn)" class="btn btn-primary">{{reservation.RETURN_BOOK}}</button>
+        <button (click)="returnBook(books.isbn)" class="btn btn-primary background">{{reservation.RETURN_BOOK}}</button>
       </div>
     </div>
   </div>
 </div>
 <ng-template #noBooks>
-  <h2 class="container text-center font-italic text-info">{{reservation.NO_BOOKS}}</h2>
+  <h2 class="container text-center font-italic text-color">{{reservation.NO_BOOKS}}</h2>
 </ng-template>

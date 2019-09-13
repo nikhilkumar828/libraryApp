@@ -1,0 +1,12 @@
+{
+    "beforeLoginNavbar": [
+        { "title": "Signup", "url": "auth/signup", "iconClass": "fa-user-plus" },
+        { "title": "Login", "url": "auth/login", "iconClass": "fa-sign-in" }
+    ],
+    "afterLoginNavbar": [
+        { "title": "Dashboard", "url": "provide_url", "iconClass": "fa-home" },
+        { "title": "Reserve", "url": "/reserveDashboard", "iconClass": "fa-bookmark" },
+        { "title": "Notification", "url": "provide_url", "iconClass": "fa-bell" },
+        { "title": "Logout", "url": "provide_url", "iconClass": "fa-sign-out" }
+    ]   
+}

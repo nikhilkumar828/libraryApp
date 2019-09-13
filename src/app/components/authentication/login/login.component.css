@@ -1,0 +1,49 @@
+input.ng-invalid.ng-touched { 
+    border: 1px solid red; 
+}
+
+.input-group-text {
+    border: none;
+}
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: red;
+    font-size: .85em;
+}
+
+.brand_logo_container {
+    position: absolute;
+    top: -3rem;
+    border-radius: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.brand_logo {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
+}
+
+.bg-dark, .btn-dark, .btn-dark:active {
+    background: #003366 !important;
+}
+
+.margin-form {
+    margin-top: 10%;
+    margin-bottom: 6%;
+}
+
+@media only screen and (max-width: 1050px) {
+    .brand_logo_container {
+        display: none;
+    }
+
+    .margin-form {
+        margin-top: 5%;
+        margin-bottom: 3%;
+    }
+} 

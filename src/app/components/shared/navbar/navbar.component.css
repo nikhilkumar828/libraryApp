@@ -1,0 +1,17 @@
+.nav-color {
+    background: #003366;
+    color: #ffffff;
+}
+
+.navbar-brand>img {
+    width: 3rem;
+    border-radius: 50%;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.head-description {
+    font-size: .9rem;
+}

@@ -13,8 +13,8 @@ export class ReservationService {
             // tslint:disable-next-line: max-line-length
             desc : 'Tempor veniam nostrud incididunt duis commodo minim ea consectetur ullamco eiusmod nostrud aliqua proident amet. Non nostrud consectetur consectetur in labore do adipisicing. Velit nostrud consequat sint adipisicing magna nostrud ut sunt elit quis. Sint adipisicing eiusmod culpa voluptate velit nostrud qui consectetur. Aute est adipisicing aliquip non occaecat voluptate minim commodo. Magna laborum aute excepteur occaecat deserunt magna sunt aute est deserunt. Veniam aliquip duis proident cillum.',
             releaseDate : '12/09/2018',
-            issueDate : '',
-            returnDate: ''
+            issueDate : '13/09/2019',
+            returnDate: '16/09/2019'
           }];
 
   private selectedBook = new Subject<object>();

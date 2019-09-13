@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark nav-color">
+    <a class="navbar-brand" routerLink="/">
+        <img src="../../../../assets/logo.png" alt="INF" class="mr-1"> {{ appTitle }}
+    </a>
+    <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+        
+        <!-- Before Authentication -->
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="false">
+            <li class="nav-item" *ngFor="let navLink of beforeLoginNavbar">
+                <a class="nav-link" routerLink={{navLink.routerLink}}  routerLinkActive="active">
+                    {{ navLink.navTitle }} <i class="fa" [ngClass]="navLink.iconClass"></i>
+                </a>
+            </li>
+        </ul>
+
+        <!-- After Authentication -->
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="true">
+            <li class="nav-item" *ngFor="let navLink of afterLoginNavbar">
+                <a class="nav-link" routerLink={{navLink.routerLink}} routerLinkActive="active">
+                    {{ navLink.navTitle }} <i class="fa" [ngClass]="navLink.iconClass"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

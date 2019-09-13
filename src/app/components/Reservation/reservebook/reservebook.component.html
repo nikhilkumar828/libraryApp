@@ -6,22 +6,22 @@
       <p class="card-text">{{books.desc}}</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">ISBN Number: {{books.isbn}}</li>
-      <li class="list-group-item">Author Name: {{books.author}}</li>
-      <li class="list-group-item">Release Date: {{books.releaseDate}}</li>
-      <li class="list-group-item">Issue Date:<input [matDatepicker]="startDatepicker" [min]="issueMinDate"
+        <li class="list-group-item">{{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.isbn}}</li>
+        <li class="list-group-item">{{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.author}}</li>
+        <li class="list-group-item">{{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.releaseDate}}</li>
+        <li class="list-group-item">{{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<input [matDatepicker]="startDatepicker" [min]="issueMinDate"
           (dateChange)="setIssueDate($event.value)" disabled>
         <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatepicker disabled="false"></mat-datepicker>
       </li>
-      <li class="list-group-item">Return Date:<input [matDatepicker]="endDatepicker" [min]="returnMinDate"
+      <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<input [matDatepicker]="endDatepicker" [min]="returnMinDate"
           [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)" disabled>
         <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
       </li>
     </ul>
     <div class="card-body">
-      <button (click)="reserveBook()" class="btn btn-primary">Reserve Book</button>
+      <button (click)="reserveBook()" class="btn btn-primary">{{reservation.RESERVE_BOOK}}</button>
     </div>
   </div>
 </div>

@@ -8,5 +8,6 @@ RETURN_DATE : 'Return Date',
 DIVIDER : ':',
 RETURN_BOOK : 'Return Book',
 NO_BOOKS : 'No books reserved!!',
+RESERVE_BOOK : 'Reserve Book',
 
 };

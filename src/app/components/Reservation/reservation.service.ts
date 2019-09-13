@@ -30,7 +30,7 @@ export class ReservationService {
     return this.books = [];
   }
 
-  reserveBook(book:object){
+  reserveBook(book: object) {
     this.selectedBook.next(book);
   }
 

@@ -7,18 +7,18 @@
         <p class="card-text">{{books.desc}}</p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">ISBN Number: {{books.isbn}}</li>
-        <li class="list-group-item">Author Name: {{books.author}}</li>
-        <li class="list-group-item">Release Date: {{books.releaseDate}}</li>
-        <li class="list-group-item">Issue Date: {{books.issueDate}}</li>
-        <li class="list-group-item">Return Date: {{books.returnDate}}</li>
+        <li class="list-group-item">{{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.isbn}}</li>
+        <li class="list-group-item">{{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.author}}</li>
+        <li class="list-group-item">{{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.releaseDate}}</li>
+        <li class="list-group-item">{{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.issueDate}}</li>
+        <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.returnDate}}</li>
       </ul>
       <div class="card-body">
-        <button (click)="returnBook(books.isbn)" class="btn btn-primary">Return Book</button>
+        <button (click)="returnBook(books.isbn)" class="btn btn-primary">{{reservation.RETURN_BOOK}}</button>
       </div>
     </div>
   </div>
 </div>
 <ng-template #noBooks>
-  <h2 class="container text-center font-italic text-info">No books reserved!!</h2>
+  <h2 class="container text-center font-italic text-info">{{reservation.NO_BOOKS}}</h2>
 </ng-template>

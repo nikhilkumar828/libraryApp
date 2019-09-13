@@ -10,14 +10,14 @@
       <li class="list-group-item">Author Name: {{books.author}}</li>
       <li class="list-group-item">Release Date: {{books.releaseDate}}</li>
       <li class="list-group-item">Issue Date:<input [matDatepicker]="startDatepicker" [min]="issueMinDate"
-          (dateInput)="setIssueDate($event.value)">
+          (dateChange)="setIssueDate($event.value)" disabled>
         <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #startDatepicker></mat-datepicker>
+        <mat-datepicker #startDatepicker disabled="false"></mat-datepicker>
       </li>
       <li class="list-group-item">Return Date:<input [matDatepicker]="endDatepicker" [min]="returnMinDate"
-          [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)">
+          [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)" disabled>
         <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #endDatepicker></mat-datepicker>
+        <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
       </li>
     </ul>
     <div class="card-body">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../reservation.service';
+import { reservation } from '../reservationsconstants';
 
 @Component({
   selector: 'app-reservation-dashboard',
@@ -8,11 +9,13 @@ import { ReservationService } from '../reservation.service';
 })
 export class ReservationDashboardComponent implements OnInit {
 
+  public reservation = reservation;
   constructor(private reservationService: ReservationService) { }
   books: any = [];
   ngOnInit() {
     this.books = this.reservationService.getReservedBooks('user1');
     console.log(this.books);
+    console.log(reservation.AUTHOR_NAME);
   }
 
   returnBook(isbn: any) {

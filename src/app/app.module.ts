@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ReservationDashboardComponent } from './components/Reservation/reservation-dashboard/reservation-dashboard.component';
 import { ReservebookComponent } from './components/Reservation/reservebook/reservebook.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReservebookComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

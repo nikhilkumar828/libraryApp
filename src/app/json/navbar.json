@@ -5,7 +5,7 @@
     ],
     "afterLoginNavbar": [
         { "title": "Dashboard", "url": "provide_url", "iconClass": "fa-home" },
-        { "title": "Reserve", "url": "/reserveBook", "iconClass": "fa-bookmark" },
+        { "title": "Reserve", "url": "/reserveDashboard", "iconClass": "fa-bookmark" },
         { "title": "Notification", "url": "provide_url", "iconClass": "fa-bell" },
         { "title": "Logout", "url": "provide_url", "iconClass": "fa-sign-out" }
     ]   

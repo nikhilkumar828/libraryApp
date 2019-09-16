@@ -9,20 +9,19 @@
         <li class="list-group-item">{{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.isbn}}</li>
         <li class="list-group-item">{{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.author}}</li>
         <li class="list-group-item">{{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.releaseDate}}</li>
-        <li class="list-group-item">{{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<input [matDatepicker]="startDatepicker" [min]="issueMinDate"
-          (dateChange)="setIssueDate($event.value)" disabled>
+        <li class="list-group-item">{{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
+        <input [(ngModel)]="issueDate" [matDatepicker]="startDatepicker" [min]="issueMinDate" (dateInput)="setIssueDate($event.value)"  disabled>
         <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatepicker disabled="false"></mat-datepicker>
       </li>
-      <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
-        <input [matDatepicker]="endDatepicker" [min]="returnMinDate"
+      <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<input [matDatepicker]="endDatepicker" [min]="returnMinDate"
           [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)" [(ngModel)]="returnDate" disabled>
         <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
       </li>
     </ul>
     <div class="card-body">
-      <button (click)="reserveBook()" class="btn btn-primary background">{{reservation.RESERVE_BOOK}}</button>
+      <button (click)="reserveBook()" [disabled]="!returnDate || !issueDate" class="btn btn-primary">{{reservation.RESERVE_BOOK}}</button>
     </div>
   </div>
 </div>

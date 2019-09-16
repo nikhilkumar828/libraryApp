@@ -14,12 +14,9 @@ export class ReservationDashboardComponent implements OnInit {
   books: any = [];
   ngOnInit() {
     this.books = this.reservationService.getReservedBooks('user1');
-    console.log(this.books);
-    console.log(reservation.AUTHOR_NAME);
   }
 
   returnBook(isbn: any) {
-    console.log(isbn);
     if (this.books[0].isbn === isbn) {
       this.books = [];
     }

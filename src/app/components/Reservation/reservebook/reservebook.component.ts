@@ -22,16 +22,15 @@ export class ReservebookComponent implements OnInit {
       this.myDate.getFullYear(),
       this.myDate.getMonth(),
       this.myDate.getDate());
-    this.returnMinDate = new Date(
+      this.returnMinDate = new Date(
       this.myDate.getFullYear(),
       this.myDate.getMonth(),
       this.myDate.getDate());
-    this.books = this.reservationService.getReservedBooks('user1');
-    console.log(this.books);
+      this.books = this.reservationService.getReservedBooks('user1');
+  
   }
   setIssueDate(event: any) {
     this.returnMinDate = event;
-    console.log('event');
     this.returnMaxDate = new Date(
       event.getFullYear(),
       event.getMonth(),
@@ -46,7 +45,6 @@ export class ReservebookComponent implements OnInit {
   }
 
   reserveBook(isbn: string) {
-    console.log('book reserved');
     console.log(this.books);
   }
 

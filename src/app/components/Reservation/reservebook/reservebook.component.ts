@@ -14,6 +14,7 @@ export class ReservebookComponent implements OnInit {
   issueMinDate: Date;
   returnMinDate: Date;
   returnMaxDate: Date;
+  returnDate = '';
 
   constructor(private reservationService: ReservationService) { }
   ngOnInit() {
@@ -31,12 +32,12 @@ export class ReservebookComponent implements OnInit {
   setIssueDate(event: any) {
     this.returnMinDate = event;
     console.log('event');
-
     this.returnMaxDate = new Date(
       event.getFullYear(),
       event.getMonth(),
       event.getDate() + 14
     );
+    this.returnDate = '';
     this.reservationService.books[0].issueDate = event.getMonth() + 1 + '/' + event.getDate() + '/' + event.getFullYear();
   }
 

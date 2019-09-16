@@ -13,7 +13,9 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ReservationDashboardComponent } from './components/Reservation/reservation-dashboard/reservation-dashboard.component';
 import { ReservebookComponent } from './components/Reservation/reservebook/reservebook.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
- 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

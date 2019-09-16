@@ -14,8 +14,9 @@
         <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatepicker disabled="false"></mat-datepicker>
       </li>
-      <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<input [matDatepicker]="endDatepicker" [min]="returnMinDate"
-          [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)" disabled>
+      <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
+        <input [matDatepicker]="endDatepicker" [min]="returnMinDate"
+          [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)" [(ngModel)]="returnDate" disabled>
         <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
       </li>

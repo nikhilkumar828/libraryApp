@@ -22,11 +22,12 @@ export class ReservationService {
 
   // tslint:disable-next-line: ban-types
   getReservedBooks(userId: String) {
+    console.log(this.books);
     return this.books;
   }
 
   // tslint:disable-next-line: ban-types
-  returnReservedBooks(isbn: String) {
+  returnReservedBook(isbn: String) {
     return this.books = [];
   }
 

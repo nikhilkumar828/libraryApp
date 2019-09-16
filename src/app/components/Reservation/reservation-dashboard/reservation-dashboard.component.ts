@@ -17,10 +17,11 @@ export class ReservationDashboardComponent implements OnInit {
   }
 
   returnBook(isbn: any) {
+    console.log('return Called');
     if (this.books[0].isbn === isbn) {
       this.books = [];
+      this.reservationService.returnReservedBook('isbnCode');
     }
-    this.reservationService.getReservedBooks('isbnCode');
   }
 
 }

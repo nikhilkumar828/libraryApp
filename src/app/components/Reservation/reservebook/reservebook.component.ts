@@ -31,6 +31,7 @@ export class ReservebookComponent implements OnInit {
   }
   setIssueDate(event: any) {
     this.returnMinDate = event;
+    console.log(event);
     this.returnMaxDate = new Date(
       event.getFullYear(),
       event.getMonth(),

@@ -37,4 +37,8 @@ describe('ReservebookComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('setIssue date function called', async(() => {
+    component.setIssueDate('Wed Sep 18 2019 00:00:00 GMT+0530 (India Standard Time)');
+    expect(component.setIssueDate).toBeTruthy();
+  }));
 });

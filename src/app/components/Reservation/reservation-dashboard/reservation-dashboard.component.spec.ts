@@ -34,7 +34,6 @@ describe('ReservationDashboardComponent', () => {
   }));
 
   it('should display book title', () => {
-    // const { fixture, component, userService } = setup();
     const mockBooks = [{
       imgURL : 'https://homepages.cae.wisc.edu/~ece533/images/fruits.png',
       title : 'Book1' ,
@@ -56,12 +55,8 @@ describe('ReservationDashboardComponent', () => {
 
 
   it('return book function called', async(() => {
-    spyOn(component, 'returnBook');
-    const button = fixture.debugElement.nativeElement.querySelector('button');
-    button.click();
-    fixture.whenStable().then(() => {
-      expect(component.returnBook).toHaveBeenCalled();
-    });
+    component.returnBook('1234');
+    expect(component.books).toEqual([]);
   }));
 
 

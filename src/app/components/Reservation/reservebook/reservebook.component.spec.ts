@@ -5,11 +5,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
+import { componentFactoryName } from '@angular/compiler';
+
+
 
 describe('ReservebookComponent', () => {
   let component: ReservebookComponent;
   let fixture: ComponentFixture<ReservebookComponent>;
+  let inputElement:HTMLInputElement;
+  let inputElement1:HTMLInputElement;
+  let spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,8 +42,47 @@ describe('ReservebookComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('setIssue date function called', async(() => {
-    component.setIssueDate('Wed Sep 18 2019 00:00:00 GMT+0530 (India Standard Time)');
-    expect(component.setIssueDate).toBeTruthy();
+  beforeEach(() =>  {
+    inputElement=fixture.nativeElement.querySelector('input[name=issueDate]');
+    inputElement1=fixture.nativeElement.querySelector('input[name=returnDate]');
+    spy=jasmine.createSpyObj('ReservebookComponent',['setIssueDate','setReturnDate']);
+  });
+
+  it('setIssue date function called', async( () => {
+    let date='Wed Sep 18 2019 00:00:00 GMT+0530 (India Standard Time)';
+    sendIssueDate(date).then(() => {
+    spy.setIssueDate('Wed Sep 18 2019 00:00:00 GMT+0530 (India Standard Time)');
+    expect(spy.setIssueDate).toHaveBeenCalledWith(date);
+     
+    });
+ }));
+ 
+ it('setReturnDate date function called', async( () => {
+  let date='Wed Sep 18 2019 00:00:00 GMT+0530 (India Standard Time)';
+  sendReturnDate(date).then(() => {
+  spy.setReturnDate('Wed Sep 18 2019 00:00:00 GMT+0530 (India Standard Time)');
+  expect(spy.setReturnDate).toHaveBeenCalledWith(date);
+   
+  });
+}));
+  
+  function sendIssueDate(date:string){
+    inputElement.value=date;
+    inputElement.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    return fixture.whenStable();
+  }
+
+  function sendReturnDate(date:string){
+    inputElement1.value=date;
+    inputElement1.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    return fixture.whenStable();
+  }
+
+  it('reserve book function called', async(() => {
+    component.reserveBook('1234');
+    expect(component).toBeTruthy();
   }));
+
 });

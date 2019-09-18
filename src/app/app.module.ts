@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NotificationComponent } from './components/notification/notification.component';
+import { Test1Component } from './components/test1/test1.component';
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { FilterContentPipe } from './components/dashboard/filter-content.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -26,7 +28,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AlertComponent,
     NavbarComponent,
     ReservationDashboardComponent,
-    ReservebookComponent
+    ReservebookComponent,
+    NotificationComponent,
+    Test1Component
   ],
   imports: [
     BrowserModule,

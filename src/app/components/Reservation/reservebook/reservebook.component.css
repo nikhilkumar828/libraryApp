@@ -3,6 +3,10 @@
     height: 100%;
 }
 
+.card {
+    font-size: 60%;
+}
+
 .text-color{
     color: #003366;
 }

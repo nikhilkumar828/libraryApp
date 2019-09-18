@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { NavLink } from 'src/app/model/NavLink';
 import NavLinks from '../../../json/navbar.json';
+import { AuthService } from 'src/app/services/auth.service.js';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -9,18 +11,21 @@ import NavLinks from '../../../json/navbar.json';
 })
 export class NavbarComponent implements OnInit {
   isNavbarCollapsed: boolean = true;
-  appTitle: string = "Library Management";
+  appTitle: string = "LIBRARY APP";
   beforeLoginNavbar: Array<NavLink> = [];
   afterLoginNavbar: Array<NavLink> = [];
-  
-  constructor() {
-    NavLinks.beforeLoginNavbar.map(link => {
+  isLoggedIn: boolean = false;
+  loginSubscription: Subscription;
+  @Input() userLoginStatus;
+
+  constructor(private authService: AuthService) {
+    NavLinks.beforeLoginNavbar.forEach(link => {
       this.beforeLoginNavbar.push(
         new NavLink(link.title, link.url, link.iconClass)
       );
     });
 
-    NavLinks.afterLoginNavbar.map(link => {
+    NavLinks.afterLoginNavbar.forEach(link => {
       this.afterLoginNavbar.push(
         new NavLink(link.title, link.url, link.iconClass)
       );
@@ -29,5 +34,4 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

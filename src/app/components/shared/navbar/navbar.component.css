@@ -1,11 +1,22 @@
 .nav-color {
-    background: #003366;
-    color: #ffffff;
+    background-color: rgb(35, 31, 32);
+    font: 700 1rem/1rem "Source Sans Pro", "Hiragino Sans GB", "Microsoft JhengHei", arial, helvetica, sans-serif;
+    font-style: normal;
 }
 
-.navbar-brand>img {
-    width: 3rem;
-    border-radius: 50%;
+.title {
+    font-size: 1rem;
+    border-left: 0.2rem solid rgb(115, 115, 115);
+    padding: 0px 0px 0.1rem 1rem;
+    margin: 0px 0px 0.2rem 1rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255);
+}
+
+.navbar-brand > img {
+    width: 4rem;
 }
 
 .nav-link {
@@ -14,4 +25,9 @@
 
 .head-description {
     font-size: .9rem;
+}
+
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }

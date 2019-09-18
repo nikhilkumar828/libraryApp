@@ -1,21 +1,14 @@
 <div class="row justify-content-center align-items-center" #card>
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-3 mx-auto">
             <div class="card mt-5">
-                <div class="d-flex justify-content-center">
-                    <div class="brand_logo_container">
-                        <img src="../../../../assets/logo.png" class="brand_logo" alt="Logo">
-                    </div>
-                </div>
-                <div class="card-header bg-dark text-white">
-                    <h4>Sign In</h4>
-                </div>
                 <div class="card-body">
+                    <h5 class="text-center">Login to continue</h5>
                     <form class="margin-form" [formGroup]="loginForm"  (ngSubmit)="login()">
                         <div class="form-group mb-3">
                             <div class="input-group">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-dark text-white">
-                                        <i class="fa fa-envelope"></i>
+                                        <em class="fa fa-envelope"></em>
                                     </span>
                                 </div>
                                 <input 
@@ -40,7 +33,7 @@
                             <div class="input-group mb-2">
                                 <div class="input-group-append">
                                     <span class="input-group-text bg-dark text-white">
-                                        <i class="fa fa-key"></i>
+                                        <em class="fa fa-key"></em>
                                     </span>
                                 </div>
                                 <input 
@@ -60,8 +53,24 @@
                         <button 
                             type="submit" 
                             class="btn btn-dark form-control mt-2"
-                        >Sign In</button>
+                        >Log In</button>
                         
+                        <div class="text-center mt-3 link-font">
+                            <span >
+                                Forgot
+                            </span>
+                            <a href="#">
+                                Password?
+                            </a>
+                        </div>
+                        <div class="text-center link-font">
+                            <span class="txt1">
+                            Create an account?
+                            </span>
+                            <a href="#" class="txt2 hov1">
+                            Sign up
+                            </a>
+                        </div>
                         <app-alert 
                             *ngIf="errorData"
                             [errorData]="errorData">

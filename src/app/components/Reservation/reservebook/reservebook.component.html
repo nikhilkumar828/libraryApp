@@ -28,7 +28,7 @@
               <input style="margin-left:16px;" name="issueDate" [(ngModel)]="issueDate" [matDatepicker]="startDatepicker" [min]="issueMinDate"
                 (dateInput)="setIssueDate($event.value)" disabled>
               <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
-              <mat-datepicker #startDatepicker disabled="false" color="accent"></mat-datepicker>
+              <mat-datepicker #startDatepicker disabled="false" color='#003366'></mat-datepicker>
             </li>
             <li class="list-group-item">
               {{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<input style="margin-left:6px;"

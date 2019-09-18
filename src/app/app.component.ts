@@ -1,4 +1,5 @@
-import { Component, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,14 @@ import { Component, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor(private renderer: Renderer2) {  }
+  userLoginStatus = false;
+  constructor(private authService: AuthService) {
+    this.authService.loginSubject.subscribe((data) => {
+      this.userLoginStatus = data;
+    });
+    
+    
+  }
 
   ngAfterViewInit(): void {
   }

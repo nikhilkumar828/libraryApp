@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
+import { AlertError } from 'src/app/model/AlertError';
 
 describe('AlertComponent', () => {
   let component: AlertComponent;
@@ -16,6 +17,7 @@ describe('AlertComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;
+    component.errorData = new AlertError("alert-success", "Login Succeed");
     fixture.detectChanges();
   });
 

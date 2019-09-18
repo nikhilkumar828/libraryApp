@@ -24,8 +24,8 @@
 }
 
 .right-margin{
-    margin-top : 3em;
-    margin-right : 2em;
+    margin-top : 1em;
+    margin-left: 1.5em;
 }
 
 .card-horizontal {
@@ -35,4 +35,11 @@
 
 .width{
     width: 40%;
+}
+.list-group-item{
+    height:4em;
+   
+}
+.text-dark{
+    font-size: 1.2em;
 }

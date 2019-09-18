@@ -1,29 +1,44 @@
 <div class="container">
   <div class="card" style="width: 70rem;" *ngFor="let books of books">
-    <img class="card-img-top rounded imgSize " src="{{books.imgURL}}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{books.title}}</h5>
-      <p class="card-text">{{books.desc}}</p>
+    <div class="media" style="margin-top:20px; margin-left:20px;">
+      <div class="media-left"><img class="media-object" style="height:15rem;" src="{{books.imgURL}}" alt="Card image cap">
+      </div>
+      <div class="media-body" style="margin-left:31px; margin-top:33px;">
+        <h5 class="media-heading">{{books.title}}</h5>
+        <p>{{books.desc}}</p>
+      </div>
     </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.isbn}}</li>
-        <li class="list-group-item">{{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.author}}</li>
-        <li class="list-group-item">{{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.releaseDate}}</li>
-        <li class="list-group-item">{{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
-        <input name="issueDate" [(ngModel)]="issueDate" [matDatepicker]="startDatepicker" [min]="issueMinDate" (dateInput)="setIssueDate($event.value)"  disabled>
-        <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #startDatepicker disabled="false"></mat-datepicker>
-      </li>
-      <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<input name="returnDate" [matDatepicker]="endDatepicker" [min]="returnMinDate"
-          [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)" [(ngModel)]="returnDate" disabled>
-        <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
-      </li>
-    </ul>
-    <div class="card-body">
-      <button (click)="reserveBook()" [disabled]="!returnDate || !issueDate" class="btn btn-primary">{{reservation.RESERVE_BOOK}}</button>
+    <div style="margin-top:25px; width:100%; display: flex">
+      <div class="card" style="width:35%;" >
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            {{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.isbn}}</li>
+          <li class="list-group-item">
+            {{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.author}}
+          </li>
+          <li class="list-group-item">
+            {{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.releaseDate}}
+          </li>
+          <li class="list-group-item">
+            {{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
+            <input style="margin-left:16px;" name="issueDate" [(ngModel)]="issueDate" [matDatepicker]="startDatepicker" [min]="issueMinDate"
+              (dateInput)="setIssueDate($event.value)" disabled>
+            <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatepicker disabled="false"></mat-datepicker>
+          </li>
+          <li class="list-group-item">
+            {{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<input style="margin-left:6px;"
+              name="returnDate" [matDatepicker]="endDatepicker" [min]="returnMinDate" [max]="returnMaxDate"
+              (dateInput)="setReturnDate($event.value)" [(ngModel)]="returnDate" disabled>
+            <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
+          </li>
+        </ul>
+      </div>
+      <div style="width:30%; padding:100px;">
+        <button (click)="reserveBook()" [disabled]="!returnDate || !issueDate"
+          class="btn btn-primary">{{reservation.RESERVE_BOOK}}</button>
+      </div>
     </div>
   </div>
 </div>
-
-

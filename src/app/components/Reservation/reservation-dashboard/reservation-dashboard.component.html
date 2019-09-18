@@ -1,25 +1,62 @@
 <div *ngIf="books.length else noBooks">
   <div class="container">
-      <h2 class="text-center font-italic text-color">{{reservation.MY_RESERVATIONS}}</h2>
-    <div class="card" style="width: 70rem;" *ngFor="let books of books">
-      <img class="card-img-top rounded imgSize " src="{{books.imgURL}}" alt="Card image cap">
+    <h2 class="text-center font-italic text-color">{{reservation.MY_RESERVATIONS}}</h2>
+    <div class="card" *ngFor="let books of books">
+      <!-- <div class="card-horizontal"> -->
       <div class="card-body">
-        <h5 class="card-title">{{books.title}}</h5>
-        <p class="card-text">{{books.desc}}</p>
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-lg-2 col-xl-3">
+            <img src={{books.imgURL}} alt="Card image cap" class="rounded imgSize" />
+          </div>
+          <div class="col-lg-10 col-xl-9">
+            <h6>{{books.title}}</h6>
+            <p>{{books.desc}}</p>
+            <button (click)="returnBook(books.isbn)" class="btn btn-primary background float-right right-margin">{{reservation.RETURN_BOOK}}</button>
+          </div>
+        </div>
       </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.isbn}}</li>
-        <li class="list-group-item">{{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.author}}</li>
-        <li class="list-group-item">{{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.releaseDate}}</li>
-        <li class="list-group-item">{{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.issueDate}}</li>
-        <li class="list-group-item">{{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.returnDate}}</li>
-      </ul>
-      <div class="card-body">
-        <button (click)="returnBook(books.isbn)" class="btn btn-primary background">{{reservation.RETURN_BOOK}}</button>
-      </div>
-    </div>
+    <ul class="list-group list-group-flush card">
+      <li class="list-group-item">
+        {{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.isbn}}</li>
+      <li class="list-group-item">
+        {{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.author}}</li>
+      <li class="list-group-item">
+        {{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.releaseDate}}
+      </li>
+      <li class="list-group-item">
+        {{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.issueDate}}
+      </li>
+      <li class="list-group-item">
+        {{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE +  books.returnDate}}
+      </li>
+    </ul>
+    <!-- <div class="card-body">
+      <button (click)="returnBook(books.isbn)" class="btn btn-primary background">{{reservation.RETURN_BOOK}}</button>
+    </div> -->
   </div>
 </div>
+</div>
 <ng-template #noBooks>
-  <h2 class="container text-center font-italic text-color">{{reservation.NO_BOOKS}}</h2>
+  <div class="row justify-content-center top-margin">
+    <h2 class="container text-center text-color">{{reservation.NO_BOOKS}}</h2>
+    <div class="col-12 col-md-10 col-lg-8">
+      <form class="card card-sm">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col">
+            <input name="searchISBN" [(ngModel)]="searchISBN"
+              class="form-control form-control-lg form-control-borderless" type="search"
+              placeholder="Search With ISBN Number">
+          </div>
+          <!--end of col-->
+          <div class="col-auto">
+            <button class="btn btn-lg btn-primary background" [disabled]="!searchISBN" type="submit"
+              (click)="searchBook(searchISBN)">{{reservation.SEARCH}}</button>
+          </div>
+          <!--end of col-->
+        </div>
+        <p class="left-margin">{{reservation.SEARCH_MESSAGE}}</p>
+      </form>
+
+    </div>
+  </div>
 </ng-template>

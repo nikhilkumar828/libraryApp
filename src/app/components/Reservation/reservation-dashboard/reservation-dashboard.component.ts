@@ -10,18 +10,27 @@ import { reservation } from '../reservationsconstants';
 export class ReservationDashboardComponent implements OnInit {
 
   public reservation = reservation;
+  searchISBN: any = '';
   constructor(private reservationService: ReservationService) { }
   books: any = [];
   ngOnInit() {
     this.books = this.reservationService.getReservedBooks('user1');
+    console.log(this.books);
+    console.log(reservation.AUTHOR_NAME);
   }
 
   returnBook(isbn: any) {
-    console.log('return Called');
+    console.log(isbn);
     if (this.books[0].isbn === isbn) {
       this.books = [];
-      this.reservationService.returnReservedBook('isbnCode');
     }
+    alert('Book Returned.');
+    this.reservationService.returnReservedBook('isbnCode');
+  }
+
+  searchBook(isbn: string) {
+    console.log(isbn);
+    this.reservationService.searchBookByISBN(isbn);
   }
 
 }

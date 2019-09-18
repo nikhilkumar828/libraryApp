@@ -1,16 +1,20 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-
+import { HttpClientTestingModule} from '@angular/common/http/testing';
+import { SearchComponent } from './components/dashboard/search/search.component';
+import { FormsModule } from '@angular/forms';
+import {FilterContentPipe} from './components/dashboard/filter-content.pipe';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
       declarations: [
-        AppComponent
+        AppComponent,
+        SearchComponent,
+        FilterContentPipe
       ],
+      imports: [ HttpClientTestingModule,FormsModule,
+        RouterTestingModule.withRoutes([]),]
     }).compileComponents();
   }));
 
@@ -23,13 +27,7 @@ describe('AppComponent', () => {
   it(`should have as title 'fccorejs'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
+    console.log(app);
     expect(app.title).toEqual('fccorejs');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('fccorejs app is running!');
   });
 });

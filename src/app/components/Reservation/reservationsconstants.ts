@@ -10,4 +10,6 @@ RETURN_BOOK : 'Return Book',
 NO_BOOKS : 'No books reserved!!',
 RESERVE_BOOK : 'Reserve Book',
 MY_RESERVATIONS : 'My Reservations',
+SEARCH_MESSAGE : 'If you do not know ISBN number you can search in home page.',
+SEARCH : 'Search',
 };

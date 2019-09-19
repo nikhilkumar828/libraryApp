@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../reservation.service';
 import { reservation } from '../reservationsconstants';
+import { MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
+import { NotificationComponent } from '../../notification/notification.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-reservation-dashboard',
@@ -11,7 +16,7 @@ export class ReservationDashboardComponent implements OnInit {
 
   public reservation = reservation;
   searchISBN: any = '';
-  constructor(private reservationService: ReservationService) { }
+  constructor(private reservationService: ReservationService , public dialog: MatDialog , private modal: NgbModal) { }
   books: any = [];
   ngOnInit() {
     this.books = this.reservationService.getReservedBooks('user1');
@@ -24,13 +29,26 @@ export class ReservationDashboardComponent implements OnInit {
     if (this.books[0].isbn === isbn) {
       this.books = [];
     }
-    alert('Book Returned.');
+    const modalRef = this.modal.open(NotificationComponent);
+    modalRef.componentInstance.option = 'return';
     this.reservationService.returnReservedBook('isbnCode');
   }
 
   searchBook(isbn: string) {
     console.log(isbn);
     this.reservationService.searchBookByISBN(isbn);
+  }
+
+  confirmationPopUp(isbn: any) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        width: '60%',
+        data: 'Do you want to Return the book?'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.returnBook(isbn);
+        }
+      });
   }
 
 }

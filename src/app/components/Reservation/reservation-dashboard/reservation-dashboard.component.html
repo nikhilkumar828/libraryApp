@@ -1,10 +1,10 @@
 <div *ngIf="books.length else noBooks">
   <div class="container">
     <h2 class="text-center text-color">{{reservation.MY_RESERVATIONS}}</h2>
-    <div *ngFor="let books of books" style="display: flex;">
-      <div class="card" style="width:85%; height: 100%" >
-        <div class="card-body">
-          <div class="row">
+    <div *ngFor="let books of books" class="row">
+      <div class="card col-12 col-md-12 col-lg-8 col-xl-10 " >
+        <div class="card-body ">
+          <div class="row align-items-center">
             <div class="col-sm-8 col-md-6 col-lg-2 col-xl-3">
               <img src={{books.imgURL}} alt="Card image cap" class="rounded imgSize" />
             </div>
@@ -15,24 +15,35 @@
           </div>
         </div>
       </div>
-      <div class="card" style="width:15%; margin-left:1em; ">
-        <ul class="list-group list-group-flush card">
-          <li class="list-group-item text-black-50 border-0">{{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
-             <p class="text-dark">{{books.isbn}}</p></li>
+      <div class="card col-12 col-md-12 col-lg-3 col-xl-2" >
+        <ul class="list-group list-group-flush">
           <li class="list-group-item text-black-50 border-0">
-            {{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p class="text-dark">{{books.author}}</p></li>
+            {{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
+            <p class="text-dark">{{books.isbn}}</p>
+          </li>
           <li class="list-group-item text-black-50 border-0">
-            {{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p class="text-dark">{{books.releaseDate}}</p></li>
+            {{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p
+              class="text-dark">{{books.author}}</p>
+          </li>
           <li class="list-group-item text-black-50 border-0">
-            {{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p class="text-dark">{{books.issueDate}}</p></li>
+            {{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p
+              class="text-dark">{{books.releaseDate | date}}</p>
+          </li>
           <li class="list-group-item text-black-50 border-0">
-            {{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p class="text-dark">{{books.returnDate}}</p></li>
+            {{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p
+              class="text-dark">{{books.issueDate | date}}</p>
+          </li>
+          <li class="list-group-item text-black-50 border-0">
+            {{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p
+              class="text-dark">{{books.returnDate | date}}</p>
+          </li>
         </ul>
         <div>
-        <button (click)="returnBook(books.isbn)"
-          class="btn btn-primary background right-margin">{{reservation.RETURN_BOOK}}</button>
-        </div>  
+          <button (click)="confirmationPopUp(books.isbn)"
+            class="btn right-margin bg-dark text-white" >{{reservation.RETURN_BOOK}}</button>
+        </div>
       </div>
+      <br>
     </div>
   </div>
 </div>
@@ -48,7 +59,7 @@
               placeholder="Search With ISBN Number">
           </div>
           <div class="col-auto">
-            <button class="btn btn-lg btn-primary background" [disabled]="!searchISBN" type="submit"
+            <button class="btn btn-lg bg-dark text-white" [disabled]="!searchISBN" type="submit"
               (click)="searchBook(searchISBN)">{{reservation.SEARCH}}</button>
           </div>
         </div>

@@ -1,9 +1,10 @@
 <div class="container">
-  <div *ngFor="let books of books" style="display: flex;">
-    <div class="card" style="width:70%; height: 100%">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-sm-8 col-md-6 col-lg-2 col-xl-3">
+    <h2 class="text-center text-color">{{reservation.RESERVE_BOOK_Title}}</h2>
+  <div *ngFor="let books of books" class="row">
+    <div class="card col-12 col-md-12 col-lg-8 col-xl-10 " >
+      <div class="card-body ">
+        <div class="row align-items-center">
+          <div class="col-sm-8 col-md-6 col-lg-2 col-xl-2">
             <img src={{books.imgURL}} alt="Card image cap" class="rounded imgSize" />
           </div>
           <div class="col-lg-10 col-xl-9">
@@ -13,30 +14,30 @@
         </div>
       </div>
     </div>
-    <div class="card" style="width:30%; margin-left:1em; ">
-      <ul class="list-group list-group-flush card">
-        <li class="list-group-item text-black-50 border-0">
+    <div class="card col-12 col-md-12 col-lg-3 col-xl-2">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-black-50 border-0 list">
           {{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
           <p class="text-dark">{{books.isbn}}</p>
         </li>
-        <li class="list-group-item text-black-50 border-0">
+        <li class="list-group-item text-black-50 border-0 list">
           {{reservation.AUTHOR_NAME + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p class="text-dark">
             {{books.author}}</p>
         </li>
-        <li class="list-group-item text-black-50 border-0">
+        <li class="list-group-item text-black-50 border-0 list">
           {{reservation.RELEASE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<p
-            class="text-dark">{{books.releaseDate}}</p>
+            class="text-dark">{{books.releaseDate | date}}</p>
         </li>
-        <li class="list-group-item input text-black-50 border-0">
+        <li class="list-group-item input text-black-50 border-0 list">
         {{reservation.ISSUE_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<br>
-        <input name="issueDate" [(ngModel)]="issueDate" [matDatepicker]="startDatepicker"
+        <input class="inputWidth" name="issueDate" [(ngModel)]="issueDate" [matDatepicker]="startDatepicker"
           [min]="issueMinDate" (dateInput)="setIssueDate($event.value)" disabled>
           <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #startDatepicker disabled="false" color='#003366'></mat-datepicker>
         </li>
-        <li class="list-group-item input text-black-50 border-0">
+        <li class="list-group-item input text-black-50 border-0 list">
         {{reservation.RETURN_DATE + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}<br><input
-          name="returnDate" [matDatepicker]="endDatepicker" [min]="returnMinDate"
+          class="inputWidth" name="returnDate" [matDatepicker]="endDatepicker" [min]="returnMinDate"
           [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)" [(ngModel)]="returnDate" disabled>
           <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
@@ -44,7 +45,7 @@
       </ul>
       <div class="button">
           <button (click)="reserveBook()" [disabled]="!returnDate || !issueDate"
-          class="btn btn-primary background right-margin">{{reservation.RESERVE_BOOK}}</button>
+          class="btn right-margin bg-dark text-white">{{reservation.RESERVE_BOOK}}</button>
       </div>
     </div>
   </div>

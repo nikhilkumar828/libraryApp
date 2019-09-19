@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../reservation.service';
 import { reservation } from '../reservationsconstants';
+import { NotificationComponent } from '../../notification/notification.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-reservebook',
@@ -17,7 +19,7 @@ export class ReservebookComponent implements OnInit {
   returnDate = '';
   issueDate = '';
 
-  constructor(private reservationService: ReservationService) { }
+  constructor(private reservationService: ReservationService , private modal: NgbModal) { }
   ngOnInit() {
     this.reservationService.getBookToReserve().subscribe( (bookObj) => {
       this.books = bookObj;
@@ -43,18 +45,20 @@ export class ReservebookComponent implements OnInit {
       event.getDate() + 14
     );
     this.returnDate = '';
-    this.books[0].issueDate = event.getMonth() + 1 + '/' + event.getDate() + '/' + event.getFullYear();
+    this.books[0].issueDate = event;
   }
 
   setReturnDate(event: any) {
     // this.reservationService.books[0].returnDate = event.getMonth() + 1 + '/' + event.getDate() + '/' + event.getFullYear();
-    this.books[0].returnDate = event.getMonth() + 1 + '/' + event.getDate() + '/' + event.getFullYear();
+    this.books[0].returnDate = event;
   }
 
   reserveBook() {
     console.log('book reserved');
     console.log(this.books);
-    alert('Book Reserved.');
+    const modalRef = this.modal.open(NotificationComponent);
+    modalRef.componentInstance.option = 'reserve';
+    // alert('Book Reserved.');
     this.reservationService.reserveBookCall(this.books);
   }
 

@@ -8,7 +8,7 @@ import { Test1Component } from './components/test1/test1.component';
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { FilterContentPipe } from './components/dashboard/filter-content.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MatDialogModule } from '@angular/material';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { LoginComponent } from './components/authentication/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ReservationDashboardComponent } from './components/Reservation/reservation-dashboard/reservation-dashboard.component';
 import { ReservebookComponent } from './components/Reservation/reservebook/reservebook.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
  
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReservationDashboardComponent,
     ReservebookComponent,
     NotificationComponent,
-    Test1Component
+    Test1Component,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    ConfirmationDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

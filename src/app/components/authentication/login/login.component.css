@@ -2,6 +2,10 @@ input.ng-invalid.ng-touched {
     border: 1px solid red; 
 }
 
+.display-none {
+    display: none;
+}
+
 .input-group-text {
     border: none;
 }

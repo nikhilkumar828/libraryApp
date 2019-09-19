@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const jwt = require('./_helpers/jwt');
-const errorHandler = require('./_helpers/error-handler');
+const jwt = require('./backend/_helpers/jwt');
+const errorHandler = require('./backend/_helpers/error-handler');
 const path = require('path');
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +17,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(jwt());
 
 // api routes
-app.use('/users', require(path.join(__dirname,'/users/user.controller.js')));
+app.use('/users', require(path.join(__dirname,'/backend/users/user.controller.js')));
+
+// api routes
+app.use('/catalog', require(path.join(__dirname,'/backend/catalog/catalog.controller.js')));
 
 // global error handler
 app.use(errorHandler);

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ControlContainer } from '@angular/forms';
 import { AlertError } from 'src/app/model/AlertError';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
@@ -17,36 +17,60 @@ export class LoginComponent implements OnInit {
   showError: boolean = false;
   errorData: AlertError;
   marginTop;
+  pageName: string;
   
   constructor(private renderer: Renderer2, private authService: AuthService, private router: Router, public modal: NgbModal) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      'email': new FormControl(null , [Validators.required, Validators.email]),
-      'password': new FormControl(null , Validators.required),
+      'email': new FormControl("" , [Validators.required, Validators.email]),
+      'password': new FormControl("" , [Validators.required, Validators.minLength(8)]),
     });
+
+    if(this.router.url === '/auth/signup') {
+      this.loginForm.addControl('firstName',new FormControl("", [ Validators.required, Validators.maxLength(15)]));
+      this.loginForm.addControl('lastName',new FormControl("", [Validators.required, Validators.maxLength(15)]));
+      this.pageName = "Sign Up";
+    }
+    else {
+      this.loginForm.removeControl('firstName');
+      this.loginForm.removeControl('lastName');
+      this.pageName = "Log In";
+    }
   }
 
   ngAfterViewInit(): void {
-    this.marginTop = (window.innerHeight - 32)  / 2 - this.element.nativeElement.offsetHeight / 2 - window.innerHeight * 0.05;
+    this.marginTop = (window.innerHeight - 32)  / 2 - this.element.nativeElement.offsetHeight / 2 - window.innerHeight * 0.05 - 14;
     this.renderer.setStyle(this.element.nativeElement, 'margin-top', `${this.marginTop}px`);
   }
 
   async login() {
+    let response;
+
     if(this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
-      return this.showAlert("alert-danger", "Fill the form properly", 2000);
+      return false;
     }
-    
-    const response = await this.authService.login(this.loginForm.value);
 
+    if(this.pageName === "Log In") {
+      response = await this.authService.login(this.loginForm.value);
+    }
+    else {
+      response = await this.authService.signup(this.loginForm.value);
+    }     
+
+    console.log(response);
+    
     if(response.hasOwnProperty('message'))
       this.showAlert("alert-danger", response.message, 2000);
+    else if(Object.keys(response).length === 0) {
+      await this.showAlert("alert-success", this.pageName + " Succeed !", 1000);
+      this.router.navigate(['login']);
+    }
     else {
-      await this.showAlert("alert-success", "Login Succeed !", 1000);
+      await this.showAlert("alert-success", this.pageName + " Succeed !", 1000);
       this.authService.loginSubject.next(true);
-      // this.router.navigate(['/notification']);
-      this.modal.open(NotificationComponent); 
+      this.modal.open(NotificationComponent, { centered: true }); 
     }
     return true;
   }

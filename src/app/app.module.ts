@@ -14,9 +14,11 @@ import { LoginComponent } from './components/authentication/login/login.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { AddbookComponent } from './components/addbook/addbook.component';
 import { ReservationDashboardComponent } from './components/Reservation/reservation-dashboard/reservation-dashboard.component';
 import { ReservebookComponent } from './components/Reservation/reservebook/reservebook.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './components/shared/footer/footer.component';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
  
 @NgModule({
@@ -30,8 +32,10 @@ import { ConfirmationDialogComponent } from './components/shared/confirmation-di
     NavbarComponent,
     ReservationDashboardComponent,
     ReservebookComponent,
+    AddbookComponent,
     NotificationComponent,
     Test1Component,
+    FooterComponent,
     ConfirmationDialogComponent
   ],
   imports: [

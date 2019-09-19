@@ -31,3 +31,23 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
+
+.active {
+    color: #76cdd8 !important;
+}
+
+.user_name {   
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: -2rem;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .user_name {
+        display: none;
+    }
+}

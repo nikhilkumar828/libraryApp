@@ -1,0 +1,27 @@
+<div class="bookform">
+    <form #addBk="ngForm" (ngSubmit)="addBook(addBk)">
+        <label>Title</label>
+        <input required minlength="5" class="form-control" type="text" name="bookName" placeholder="Book Name" ngModel #booktitle="ngModel">
+        <div *ngIf="booktitle.invalid && booktitle.touched">
+            <small class="text-danger" *ngIf="booktitle.errors?.required">*Book title is required</small>
+            <small class="text-danger" *ngIf="booktitle.errors?.minlength">*Title must be at least 5 characters</small>
+        </div>
+        <label>ISBN</label>
+        <input required class="form-control" type="number" name="ISBN" placeholder="ISBN" ngModel #isbn="ngModel">
+        <div *ngIf="isbn.invalid && isbn.touched">
+            <small class="text-danger" *ngIf="isbn.errors?.required">*ISBN Number is a must</small>
+        </div>
+        <label>Author Name</label>
+        <input required minlength="3" class="form-control" type="text" name="author" placeholder="Author" ngModel #authorName="ngModel">
+        <div *ngIf="authorName.invalid && authorName.touched">
+            <small class="text-danger" *ngIf="authorName.errors?.required">*Author Name is required</small>
+            <small class="text-danger" *ngIf="authorName.errors?.minlength">*Author Name must be at least 3 characters</small>
+        </div>
+        <label>Release Date</label>
+        <input required class="form-control" type="date" name="relDate" placeholder="Release Date" ngModel #relDate="ngModel">
+        <div *ngIf="relDate.invalid && relDate.touched">
+            <small class="text-danger" *ngIf="relDate.errors?.required">*Release Date is required</small>
+        </div>
+        <button [disabled]="!addBk.valid" class="btn btn-success" type="submit">Add Book</button>
+    </form>
+</div>

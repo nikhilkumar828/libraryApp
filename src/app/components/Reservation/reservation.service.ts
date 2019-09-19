@@ -9,31 +9,31 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ReservationService {
   books = [
-    {
-            imgURL : 'https://homepages.cae.wisc.edu/~ece533/images/fruits.png',
-            title : 'Book1' ,
-            isbn : '1234',
-            author : 'Huckle',
-            // tslint:disable-next-line: max-line-length
-            desc : 'Tempor veniam nostrud incididunt duis commodo minim ea consectetur ullamco eiusmod nostrud aliqua proident amet. Non nostrud consectetur consectetur in labore do adipisicing. Velit nostrud consequat sint adipisicing magna nostrud ut sunt elit quis. Sint adipisicing eiusmod culpa voluptate velit nostrud qui consectetur. Aute est adipisicing aliquip non occaecat voluptate minim commodo. Magna laborum aute excepteur occaecat deserunt magna sunt aute est deserunt. Veniam aliquip duis proident cillum.',
-            releaseDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
-            issueDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
-            returnDate: 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) '
-          }
+    // {
+    //         imgURL : 'https://homepages.cae.wisc.edu/~ece533/images/fruits.png',
+    //         title : 'Book1' ,
+    //         isbn : '1234',
+    //         author : 'Huckle',
+             // tslint:disable-next-line: max-line-length
+    //         desc : 'Tempor veniam nostrud incididunt duis commodo minim ea consectetur ullamco eiusmod nostrud aliqua proident amet. Non nostrud consectetur consectetur in labore do adipisicing. Velit nostrud consequat sint adipisicing magna nostrud ut sunt elit quis. Sint adipisicing eiusmod culpa voluptate velit nostrud qui consectetur. Aute est adipisicing aliquip non occaecat voluptate minim commodo. Magna laborum aute excepteur occaecat deserunt magna sunt aute est deserunt. Veniam aliquip duis proident cillum.',
+    //         releaseDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
+    //         issueDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
+    //         returnDate: 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) '
+    //       }
   ];
 
   searchedBook = [
-    {
-            imgURL : 'https://homepages.cae.wisc.edu/~ece533/images/fruits.png',
-            title : 'Book2' ,
-            isbn : '1234',
-            author : 'Huckle123',
-            // tslint:disable-next-line: max-line-length
-            desc : 'Tempor veniam nostrud incididunt duis commodo minim ea consectetur ullamco eiusmod nostrud aliqua proident amet. Non nostrud consectetur consectetur in labore do adipisicing. Velit nostrud consequat sint adipisicing magna nostrud ut sunt elit quis. Sint adipisicing eiusmod culpa voluptate velit nostrud qui consectetur. Aute est adipisicing aliquip non occaecat voluptate minim commodo. Magna laborum aute excepteur occaecat deserunt magna sunt aute est deserunt. Veniam aliquip duis proident cillum.',
-            releaseDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
-            issueDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
-            returnDate: 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) '
-    }
+    // {
+    //         imgURL : 'https://homepages.cae.wisc.edu/~ece533/images/fruits.png',
+    //         title : 'Book2' ,
+    //         isbn : '1234',
+    //         author : 'Huckle123',
+             // tslint:disable-next-line: max-line-length
+    //         desc : 'Tempor veniam nostrud incididunt duis commodo minim ea consectetur ullamco eiusmod nostrud aliqua proident amet. Non nostrud consectetur consectetur in labore do adipisicing. Velit nostrud consequat sint adipisicing magna nostrud ut sunt elit quis. Sint adipisicing eiusmod culpa voluptate velit nostrud qui consectetur. Aute est adipisicing aliquip non occaecat voluptate minim commodo. Magna laborum aute excepteur occaecat deserunt magna sunt aute est deserunt. Veniam aliquip duis proident cillum.',
+    //         releaseDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
+    //         issueDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
+    //         returnDate: 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) '
+    // }
   ];
 
   private selectedBook = new BehaviorSubject<object>({});
@@ -50,7 +50,7 @@ export class ReservationService {
     await fetch('https://library-fccj.herokuapp.com/catalog/release', {
       method: 'POST',
       body: JSON.stringify({
-        bookID: '5d80f0eedc51bb67a51cfcaf',
+        bookID: '5d810889851ef0680dde6705',
         ownerID: user._id
       }),
       headers: {
@@ -65,7 +65,6 @@ export class ReservationService {
   }
 
   reserveBook(book: object) {
-    console.log(book);
     this.selectedBook.next(book);
     this.router.navigate(['reserveBook']);
   }
@@ -89,14 +88,18 @@ export class ReservationService {
     .then((response) => {
       console.log('in response');
       console.log(response);
-      // this.searchedBook = response;
+      this.searchedBook = response;
     });
 
-    console.log(isbn);
     if ( this.searchedBook.length > 0 && this.searchedBook[0].isbn === isbn) {
-      this.reserveBook(this.searchedBook);
+      if ( !this.searchedBook[0].rentedCount) {
+         this.reserveBook(this.searchedBook[0]);
+      } else {
+        const modalRef = this.modal.open(NotificationComponent, { centered: true });
+        modalRef.componentInstance.option = 'wrong';
+      }
     } else {
-      const modalRef = this.modal.open(NotificationComponent);
+      const modalRef = this.modal.open(NotificationComponent, { centered: true });
       modalRef.componentInstance.option = 'wrong';
       // alert('Book with ISBN not Found.');
     }
@@ -105,11 +108,13 @@ export class ReservationService {
   async reserveBookCall(book: object) {
     const diffInMs: number = Date.parse(book[0].returnDate) - Date.parse(book[0].issueDate);
     const days = diffInMs / (1000 * 3600 * 24);
+    console.log('here');
+    console.log(book[0]._id);
     const  user = JSON.parse(localStorage.getItem('user'));
     await fetch('https://library-fccj.herokuapp.com/catalog/rent', {
       method: 'POST',
       body: JSON.stringify({
-        bookID: '5d80f0eedc51bb67a51cfcaf',
+        bookID: book[0]._id,
         ownerID: user._id,
         startDate: book[0].issueDate,
         daysToRent: days

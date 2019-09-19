@@ -29,7 +29,7 @@ export class ReservationDashboardComponent implements OnInit {
     if (this.books[0].isbn === isbn) {
       this.books = [];
     }
-    const modalRef = this.modal.open(NotificationComponent);
+    const modalRef = this.modal.open(NotificationComponent, { centered: true });
     modalRef.componentInstance.option = 'return';
     this.reservationService.returnReservedBook('isbnCode');
   }

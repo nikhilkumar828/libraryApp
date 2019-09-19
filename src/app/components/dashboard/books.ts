@@ -1,7 +1,8 @@
 export class Books {
-    isbn: number;
-    title: string;
-    author: string;
-    releaseDate: Date;
-    availability: boolean;
+    ISBN: number;
+    Title: string;
+    Author: string;
+    releaseYear: number;
+    Availability: boolean;
+    Count: number;
 }

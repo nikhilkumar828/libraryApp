@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 import { LoginComponent } from './components/authentication/login/login.component';
+import { AddbookComponent } from './components/addbook/addbook.component';
 import { ReservationDashboardComponent } from './components/Reservation/reservation-dashboard/reservation-dashboard.component';
 import { ReservebookComponent } from './components/Reservation/reservebook/reservebook.component';
 import { AuthGuard } from './services/auth-guard.service';
@@ -20,9 +21,18 @@ const routes: Routes = [
     component: AuthenticationComponent, 
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent }
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: LoginComponent }
     ]
   },
+  {
+    path:"",redirectTo:"auth",pathMatch:'full'
+  },
+  {
+    path:"add",component:AddbookComponent
+  },
+  { path: 'reserveDashboard', component: ReservationDashboardComponent },
+  { path: 'reserveBook', component: ReservebookComponent },
   { 
     path: 'reserveDashboard', 
     component: ReservationDashboardComponent,

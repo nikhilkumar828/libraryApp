@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   afterLoginNavbar: Array<NavLink> = [];
   isLoggedIn: boolean = false;
   loginSubscription: Subscription;
+  @Input() currentUser: any;
   @Input() userLoginStatus;
 
   constructor(private authService: AuthService) {

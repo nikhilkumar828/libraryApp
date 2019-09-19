@@ -16,6 +16,25 @@ export class AuthService {
     }
   }
 
+  async signup(signupData: { email: string, password: string, firstName: string, lastName:string }) {
+    return await fetch('https://library-fccj.herokuapp.com/users/register', {
+      method: 'POST',
+      body: JSON.stringify({
+        firstName: signupData.firstName,
+        lastName: signupData.lastName,
+        username: signupData.email,
+        password: signupData.password
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+    .then(response => response.json())
+    .then((response) => {
+      return response;
+    })
+  }
+
   async login(loginData: { email: string, password: string } ) {
     return await fetch('https://library-fccj.herokuapp.com/users/authenticate', {
       method: 'POST',
@@ -29,10 +48,7 @@ export class AuthService {
     })
     .then(response => response.json())
     .then((response) => {
-      if(!response.hasOwnProperty('message')) {
-        localStorage.setItem("user", JSON.stringify(response));
-      }
-      return response;
+      return this.setUserCredentials(response);
     });
   }
 
@@ -43,8 +59,20 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const  user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     user !== null ? this.user = user : this.user = null;
     return this.user !== null;
+  }
+
+  setUserCredentials(response) {
+    if(!response.hasOwnProperty('message')) {
+      localStorage.setItem("user", JSON.stringify(response));
+      this.isLoggedIn();
+    }
+    return response;
+  }
+
+  getLoggedInUser() {
+    return this.user;
   }
 }

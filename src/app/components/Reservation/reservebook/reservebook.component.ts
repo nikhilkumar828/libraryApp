@@ -22,7 +22,7 @@ export class ReservebookComponent implements OnInit {
   constructor(private reservationService: ReservationService , private modal: NgbModal) { }
   ngOnInit() {
     this.reservationService.getBookToReserve().subscribe( (bookObj) => {
-      this.books = bookObj;
+      this.books.push(bookObj);
     });
     this.issueMinDate = new Date(
       this.myDate.getFullYear(),
@@ -33,6 +33,7 @@ export class ReservebookComponent implements OnInit {
       this.myDate.getMonth(),
       this.myDate.getDate());
     // this.books = this.reservationService.getReservedBooks('user1');
+    console.log('consructor');
     console.log(this.books);
   }
   setIssueDate(event: any) {
@@ -56,7 +57,7 @@ export class ReservebookComponent implements OnInit {
   reserveBook() {
     console.log('book reserved');
     console.log(this.books);
-    const modalRef = this.modal.open(NotificationComponent);
+    const modalRef = this.modal.open(NotificationComponent, { centered: true });
     modalRef.componentInstance.option = 'reserve';
     // alert('Book Reserved.');
     this.reservationService.reserveBookCall(this.books);

@@ -2,10 +2,10 @@
   <div class="container">
     <h2 class="text-center text-color">{{reservation.MY_RESERVATIONS}}</h2>
     <div *ngFor="let books of books" class="row">
-      <div class="card col-12 col-md-12 col-lg-8 col-xl-10 " >
+      <div class="card col-12 col-md-12 col-lg-8 col-xl-10 ">
         <div class="card-body ">
-          <div class="row align-items-center">
-            <div class="col-sm-8 col-md-6 col-lg-2 col-xl-3">
+          <div class="row align-items-center h-100">
+            <div class="col-sm-8 col-md-6 col-lg-2 col-xl-3 aligin-self-center">
               <img src={{books.imgURL}} alt="Card image cap" class="rounded imgSize" />
             </div>
             <div class="col-lg-10 col-xl-9">
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="card col-12 col-md-12 col-lg-3 col-xl-2 padding-0" >
+      <div class="card col-12 col-md-12 col-lg-3 col-xl-2 padding-0">
         <ul class="list-group list-group-flush">
           <li class="list-group-item text-black-50 border-0 list">
             {{reservation.ISBN_NUMBER + reservation.SPACE + reservation.DIVIDER + reservation.SPACE}}
@@ -40,7 +40,7 @@
         </ul>
         <div>
           <button (click)="confirmationPopUp(books.isbn)"
-            class="btn right-margin bg-dark text-white" >{{reservation.RETURN_BOOK}}</button>
+            class="btn right-margin bg-dark text-white">{{reservation.RETURN_BOOK}}</button>
         </div>
       </div>
       <br>

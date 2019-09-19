@@ -20,21 +20,5 @@ export class AppComponent {
   }
 
   ngAfterViewInit(): void {
-    fetch('/users/register', {
-      method: 'POST',
-      body: JSON.stringify({
-        firstName: 'india',
-        lastName: 'india',
-        username: 'india@gmail.com',
-        password: 'india'
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8'
-      }
-    })
-    .then(res => res.json())
-    .then(console.log)
-    
-    
   }
 }

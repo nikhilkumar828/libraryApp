@@ -1,4 +1,4 @@
-input.ng-invalid.ng-touched { 
+input.ng-invalid.ng-touched, .invalid { 
     border: 1px solid red; 
 }
 
@@ -28,4 +28,12 @@ input.ng-invalid.ng-touched {
 
 .link-font {
     font-size: .8rem;
+}
+
+button:disabled {
+    opacity: none !important;
+}
+
+.btn.disabled, .btn:disabled {
+    opacity: none;
 }

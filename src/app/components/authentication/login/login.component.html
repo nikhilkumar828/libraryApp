@@ -23,6 +23,8 @@
                                 name="firstName"
                                 formControlName="firstName"
                                 onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                                (keyup)="nameValidation('firstName')"
+                                [ngClass]="{ 'invalid': !alphabetValidation['firstName'] }"
                             >
                         </div>
                         <span 
@@ -34,6 +36,11 @@
                             class="help-block" 
                             *ngIf="loginForm.get('firstName').value.length > 15">
                             Name must be less than 16 characters
+                        </span>
+                        <span 
+                            class="help-block" 
+                            *ngIf="!this.alphabetValidation['firstName']">
+                            Only alphabets are allowed!
                         </span>
                     </div>
                     <div class="form-group mb-3" *ngIf="pageName === 'Sign Up'">
@@ -50,6 +57,8 @@
                                 name="lastName"
                                 formControlName="lastName"
                                 onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                                (keyup)="nameValidation('lastName')"
+                                [ngClass]="{ 'invalid': !alphabetValidation['lastName'] }"
                             >
                         </div>
                         <span 
@@ -61,6 +70,11 @@
                             class="help-block" 
                             *ngIf="loginForm.get('lastName').value.length > 15">
                             Name must be less than 16 characters
+                        </span>
+                        <span 
+                            class="help-block" 
+                            *ngIf="!alphabetValidation['lastName']">
+                            Only alphabets are allowed!
                         </span>
                     </div>
                     <div class="form-group mb-3">

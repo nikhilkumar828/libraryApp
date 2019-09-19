@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit {
   errorData: AlertError;
   marginTop;
   pageName: string;
+  alphabetValidation = {
+    firstName: true,
+    lastName: true
+  };
   
   constructor(private renderer: Renderer2, private authService: AuthService, private router: Router, public modal: NgbModal) { }
 
@@ -51,6 +55,9 @@ export class LoginComponent implements OnInit {
       this.loginForm.markAllAsTouched();
       return false;
     }
+    
+    if(this.pageName === "Sign Up" && (!this.nameValidation('firstName') || !this.nameValidation('lastName'))) 
+      return;
 
     if(this.pageName === "Log In") {
       response = await this.authService.login(this.loginForm.value);
@@ -88,5 +95,16 @@ export class LoginComponent implements OnInit {
       this.showError = false;
       this.errorData = null;
     });
+  }
+
+  nameValidation(control: string) {
+    if(this.loginForm.get(control).value.match('^[a-zA-Z]*$')) {
+      this.alphabetValidation[control] = true;
+      return true;
+    }
+    else {
+      this.alphabetValidation[control] = false;
+      return false;
+    }
   }
 }

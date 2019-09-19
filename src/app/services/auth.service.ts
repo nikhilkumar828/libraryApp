@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   async signup(signupData: { email: string, password: string, firstName: string, lastName:string }) {
-    return await fetch('https://library-fccj.herokuapp.com/users/register', {
+    return await fetch('/users/register', {
       method: 'POST',
       body: JSON.stringify({
         firstName: signupData.firstName,
@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   async login(loginData: { email: string, password: string } ) {
-    return await fetch('https://library-fccj.herokuapp.com/users/authenticate', {
+    return await fetch('/users/authenticate', {
       method: 'POST',
       body: JSON.stringify({
         username: loginData.email,

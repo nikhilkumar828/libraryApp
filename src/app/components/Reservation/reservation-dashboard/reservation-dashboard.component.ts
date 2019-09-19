@@ -19,34 +19,31 @@ export class ReservationDashboardComponent implements OnInit {
   constructor(private reservationService: ReservationService , public dialog: MatDialog , private modal: NgbModal) { }
   books: any = [];
   ngOnInit() {
-    this.books = this.reservationService.getReservedBooks('user1');
-    console.log(this.books);
-    console.log(reservation.AUTHOR_NAME);
+    this.reservationService.getReservedBooks();
+    this.reservationService.getReservedBooksOfUser().subscribe( (bookObj) => {
+      this.books = bookObj;
+    });
   }
 
-  returnBook(isbn: any) {
-    console.log(isbn);
-    if (this.books[0].isbn === isbn) {
-      this.books = [];
-    }
+  returnBook(id: any) {
+    console.log(id);
     const modalRef = this.modal.open(NotificationComponent, { centered: true });
     modalRef.componentInstance.option = 'return';
-    this.reservationService.returnReservedBook('isbnCode');
+    this.reservationService.returnReservedBook(id);
   }
 
   searchBook(isbn: string) {
-    console.log(isbn);
     this.reservationService.searchBookByISBN(isbn);
   }
 
-  confirmationPopUp(isbn: any) {
+  confirmationPopUp(id: any) {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         width: '60%',
         data: 'Do you want to Return the book?'
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.returnBook(isbn);
+          this.returnBook(id);
         }
       });
   }

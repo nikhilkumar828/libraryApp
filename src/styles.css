@@ -4,3 +4,7 @@ body {
     letter-spacing: 0.085rem;
     font: "Source Sans Pro", "Hiragino Sans GB", "Microsoft JhengHei", arial, helvetica, sans-serif;
 }
+
+.btn.disabled, .btn:disabled {
+    opacity: none;
+}

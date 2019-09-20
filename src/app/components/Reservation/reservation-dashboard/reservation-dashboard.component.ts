@@ -48,4 +48,10 @@ export class ReservationDashboardComponent implements OnInit {
       });
   }
 
+  getReturnDate( Issuedate , noOfDays) {
+    const date = new Date(Issuedate);
+    date.setDate( date.getDate() + noOfDays );
+    return date;
+  }
+
 }

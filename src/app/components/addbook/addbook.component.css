@@ -3,6 +3,7 @@
 }
 button{
     margin-top: 10px;
+    background:  rgb(35, 31, 32)
 }
 .vertical-center {
     min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
@@ -10,4 +11,11 @@ button{
   
     display: flex;
     align-items: center;
+  }
+  
+  img {
+    width:280px;
+    height:320px;
+    padding: 10px;
+
   }

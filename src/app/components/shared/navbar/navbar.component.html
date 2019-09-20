@@ -23,11 +23,12 @@
                 <!-- After Authentication -->
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="userLoginStatus">
                     <li class="nav-item" *ngFor="let navLink of afterLoginNavbar">
-                        <div>
-                            <a class="nav-link" routerLink={{navLink.routerLink}} routerLinkActive="active">
-                                {{ navLink.navTitle }} <em class="fa" [ngClass]="navLink.iconClass"></em>
-                            </a>
-                        </div>
+                        <a class="nav-link" *ngIf="navLink.navTitle !== 'ADD-BOOK'" routerLink={{navLink.routerLink}} routerLinkActive="active">
+                            {{ navLink.navTitle }} <em class="fa" [ngClass]="navLink.iconClass"></em>
+                        </a>
+                        <a class="nav-link" *ngIf="navLink.navTitle === 'ADD-BOOK' && currentUser.username === 'admin@epam.com'" routerLink={{navLink.routerLink}} routerLinkActive="active">
+                            {{ navLink.navTitle }} <em class="fa" [ngClass]="navLink.iconClass"></em>
+                        </a>
                     </li>
                 </ul>
             </div>

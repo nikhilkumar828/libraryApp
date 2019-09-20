@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { SearchService } from '../components/dashboard/search.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class AuthService {
   user: any;
   loginSubject = new BehaviorSubject(false);
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private searchService: SearchService) {
     if(this.isLoggedIn()) {
       this.loginSubject.next(true);
       this.router.navigate(['dashboard']);
@@ -55,6 +56,7 @@ export class AuthService {
   async logout() {
     localStorage.removeItem('user');
     this.loginSubject.next(false);
+    this.searchService.resetInput();
     this.router.navigate(['auth/login']);
   }
 

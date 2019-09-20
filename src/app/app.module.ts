@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { Test1Component } from './components/test1/test1.component';
 import { SearchComponent } from './components/dashboard/search/search.component';
+import { SearchService } from './components/dashboard/search.service';
 import { FilterContentPipe } from './components/dashboard/filter-content.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatDialogModule } from '@angular/material';
@@ -20,6 +21,7 @@ import { ReservebookComponent } from './components/Reservation/reservebook/reser
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
+import { HistoryComponent } from './components/history/history.component';
  
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ConfirmationDialogComponent } from './components/shared/confirmation-di
     NotificationComponent,
     Test1Component,
     FooterComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { ConfirmationDialogComponent } from './components/shared/confirmation-di
   entryComponents: [
     ConfirmationDialogComponent
   ],
-  providers: [],
+  providers: [SearchService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

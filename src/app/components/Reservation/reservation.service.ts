@@ -29,9 +29,19 @@ export class ReservationService {
   constructor(private router: Router, private modal: NgbModal ) { }
 
   // tslint:disable-next-line: ban-types
-  getReservedBooks() {
+  async getReservedBooks() {
     const  user = JSON.parse(localStorage.getItem('user'));
-    this.userBooks.next(this.books);
+    await fetch('/catalog/rentid/' + user._id, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+    .then(res => res.json())
+    .then((response) => {
+      console.log(response);
+      this.userBooks.next(response);
+    });
   }
 
   getReservedBooksOfUser() {
@@ -91,7 +101,7 @@ export class ReservationService {
          this.reserveBook(this.searchedBook[0]);
       } else {
         const modalRef = this.modal.open(NotificationComponent, { centered: true });
-        modalRef.componentInstance.option = 'wrong';
+        modalRef.componentInstance.option = 'already';
       }
     } else {
       const modalRef = this.modal.open(NotificationComponent, { centered: true });

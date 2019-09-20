@@ -1,6 +1,10 @@
 .bg {
   font: 1.3rem "Source Sans Pro", "Hiragino Sans GB", "Microsoft JhengHei", arial, helvetica, sans-serif;
 }
+.heading {
+  font: 1.3rem "Source Sans Pro", "Hiragino Sans GB", "Microsoft JhengHei", arial, helvetica, sans-serif;
+  padding-left:1vw; 
+}
 .table-heading{
   color: white;
   background-color: hsl(345, 6.1%, 12%);
@@ -55,14 +59,28 @@ a:hover {
 
 .btn-success:hover:enabled {
   color: #FFF;
-  background: #222222;
-  border: 2px solid #222222;
+  background: #76cdd8;
+  border: 2px solid #76cdd8;
+}
+.available {
+  margin-top: 1vh;
+  margin-bottom: 0;
+  padding: 0;
+  font-size: 50%;
+}
+.imageData{
+  height:5vh;
+  width: 3vw;
+  transition: transform .2s;
+}
+.imageData:hover {
+  transform: scale(2.5); 
 }
 
 .table > thead {
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 
 .table > tbody {
-  font-size: .9rem;
+  font-size: 1.1rem;
 }

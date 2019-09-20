@@ -9,6 +9,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { Test1Component } from './components/test1/test1.component';
+import { HistoryComponent } from './components/history/history.component';
 
 const routes: Routes = [
   {
@@ -58,7 +59,7 @@ const routes: Routes = [
     canActivate: [ AuthGuard ]
   },
   { path:'notification', 
-    component: Test1Component,
+    component: HistoryComponent,
     canActivate: [ AuthGuard ]
   }
 ];

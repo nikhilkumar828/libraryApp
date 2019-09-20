@@ -10,7 +10,7 @@ export class FilterContentPipe implements PipeTransform {
   transform(value: any, filterString: string, propName: string): any {
     if (!value.length || !filterString) return value;
     let resultArray:Books[] = [];
-    if(filterString.length>=3){
+    if((propName!='releaseYear' && filterString.length>=3) || (propName=='releaseYear' && filterString.length==4)){
     for (const item of value) {
       if (item[propName].toString().toLowerCase().startsWith(filterString.toLowerCase())) {
         resultArray.push(item);

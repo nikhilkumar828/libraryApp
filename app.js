@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const jwt = require('./backend/_helpers/jwt');
 const errorHandler = require('./backend/_helpers/error-handler');
 const path = require('path');
+const sendmail = require('./backend/_helpers/mail');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,6 +25,8 @@ app.use('/catalog', require(path.join(__dirname,'/backend/catalog/catalog.contro
 
 // global error handler
 app.use(errorHandler);
+
+app.post('/mail', sendmail);
 
 app.get('/*', (req, res) => {
 

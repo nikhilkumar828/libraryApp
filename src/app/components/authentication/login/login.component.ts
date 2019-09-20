@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   errorData: AlertError;
   marginTop;
   pageName: string;
+  submitted: boolean = false;
+
   alphabetValidation = {
     firstName: true,
     lastName: true
@@ -56,17 +58,16 @@ export class LoginComponent implements OnInit {
       return false;
     }
     
-    if(this.pageName === "Sign Up" && (!this.nameValidation('firstName') || !this.nameValidation('lastName'))) 
-      return;
-
+    this.submitted = true;
     if(this.pageName === "Log In") {
       response = await this.authService.login(this.loginForm.value);
     }
     else {
+      if(!this.nameValidation('firstName') || !this.nameValidation('lastName')) 
+        return;
       response = await this.authService.signup(this.loginForm.value);
-    }     
-
-    console.log(response);
+    }  
+    this.submitted = false;   
     
     if(response.hasOwnProperty('message'))
       this.showAlert("alert-danger", response.message, 2000);

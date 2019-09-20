@@ -10,7 +10,7 @@ export class SearchService {
 	constructor() {}
 
 	getData():void {
-		fetch('/catalog/', {
+		fetch('https://library-fccj.herokuapp.com/catalog/', {
 				method: 'GET',
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8'

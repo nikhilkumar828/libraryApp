@@ -27,7 +27,6 @@
 
 .right-margin{
     margin-top : 1em;
-    margin-left: 1.5em;
 }
 
 .card-horizontal {
@@ -43,13 +42,30 @@
    
 }
 .text-dark{
-    font-size: 1em;
+    font-size: 1.3em;
 }
 .row{
     margin-bottom: 1em;
 }
-
-.padding-0 {
-    padding: 0;
+.button{
+    margin-top:0.4em;
+}
+.padding-0{
+    padding:1em;
 }
 
+.list{
+padding:0;
+}
+
+.description{
+    font-family: museo-slab, source-han-sans-simplified-c, "Source Sans Pro", arial, helvetica, sans-serif;
+    font-weight: 300;
+}
+
+.title{
+    font-size:24px;
+}
+.details{
+    font-size:14.5px;
+}

@@ -31,7 +31,7 @@ export class ReservationService {
   // tslint:disable-next-line: ban-types
   async getReservedBooks() {
     const  user = JSON.parse(localStorage.getItem('user'));
-    await fetch('/catalog/rentid/' + user._id, {
+    await fetch('https://library-fccj.herokuapp.com/catalog/rentid/' + user._id, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
@@ -51,7 +51,7 @@ export class ReservationService {
    async returnReservedBook(id: String) {
     const  user = JSON.parse(localStorage.getItem('user'));
     console.log(id);
-    await fetch('/catalog/release', {
+    await fetch('https://library-fccj.herokuapp.com/catalog/release', {
       method: 'POST',
       body: JSON.stringify({
         bookID: id,
@@ -79,7 +79,7 @@ export class ReservationService {
   }
 
   async searchBookByISBN(isbn: string) {
-    await fetch('/catalog/search', {
+    await fetch('https://library-fccj.herokuapp.com/catalog/search', {
       method: 'POST',
       body: JSON.stringify({
         key: 'isbn',
@@ -116,7 +116,7 @@ export class ReservationService {
     console.log('here');
     console.log(book[0]._id);
     const  user = JSON.parse(localStorage.getItem('user'));
-    await fetch('/catalog/rent', {
+    await fetch('https://library-fccj.herokuapp.com/catalog/rent', {
       method: 'POST',
       body: JSON.stringify({
         bookID: book[0]._id,

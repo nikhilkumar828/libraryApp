@@ -38,7 +38,6 @@ export class ReservationDashboardComponent implements OnInit {
 
   confirmationPopUp(id: any) {
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-        width: '60%',
         data: 'Do you want to Return the book?'
       });
       dialogRef.afterClosed().subscribe(result => {

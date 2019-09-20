@@ -5,12 +5,14 @@
     min-height: 200px;
 }
 
+
 .text-color{
     color: rgb(35, 31, 32);
 }
 
 .card {
     font-size: 75%;
+    padding:1em;
 }
 
 .background{
@@ -25,11 +27,6 @@
     margin-top : 6em;
 }
 
-.right-margin{
-    margin-top : 1em;
-    margin-left: 1.5em;
-}
-
 .card-horizontal {
     display: flex;
     flex: 1 1 auto;
@@ -39,11 +36,11 @@
     width: 40%;
 }
 .list-group-item{
-    height:5em;
-   
-}
+    height:4em;
+   }
 .text-dark{
-    font-size: 1em;
+    font-size: 1.3em;
+    margin-bottom:0;
 }
 
 .padding-zero{
@@ -58,3 +55,31 @@
     padding: 0;
     margin: 0 0 0 0;
 }
+
+.input{
+    height:4.5em;
+}
+
+.button{
+    margin-top:0.4em;
+}
+
+.description{
+    font-family: museo-slab, source-han-sans-simplified-c, "Source Sans Pro", arial, helvetica, sans-serif;
+    font-weight: 300;
+}
+
+.title{
+    font-size:24px;
+}
+.details{
+    font-size:14.5px;
+}
+
+::ng-deep .mat-datepicker-toggle {
+  color: rgb(35, 31, 32);
+}
+    
+::ng-deep .mat-calendar-body-selected  {
+    background-color: rgb(35, 31, 32);
+} 

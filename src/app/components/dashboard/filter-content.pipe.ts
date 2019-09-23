@@ -12,7 +12,7 @@ export class FilterContentPipe implements PipeTransform {
     let resultArray:Books[] = [];
     if((propName!='releaseYear' && filterString.length>=3) || (propName=='releaseYear' && filterString.length==4)){
     for (const item of value) {
-      if (item[propName].toString().toLowerCase().startsWith(filterString.toLowerCase())) {
+      if (item[propName].toString().toLowerCase().includes(filterString.toLowerCase())) {
         resultArray.push(item);
       }
     }

@@ -9,20 +9,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ReservationService {
   books = [ ];
+  index: any;
 
-  searchedBook = [
-    // {
-    //         imgURL : 'https://homepages.cae.wisc.edu/~ece533/images/fruits.png',
-    //         title : 'Book2' ,
-    //         isbn : '1234',
-    //         author : 'Huckle123',
-             // tslint:disable-next-line: max-line-length
-    //         desc : 'Tempor veniam nostrud incididunt duis commodo minim ea consectetur ullamco eiusmod nostrud aliqua proident amet. Non nostrud consectetur consectetur in labore do adipisicing. Velit nostrud consequat sint adipisicing magna nostrud ut sunt elit quis. Sint adipisicing eiusmod culpa voluptate velit nostrud qui consectetur. Aute est adipisicing aliquip non occaecat voluptate minim commodo. Magna laborum aute excepteur occaecat deserunt magna sunt aute est deserunt. Veniam aliquip duis proident cillum.',
-    //         releaseDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
-    //         issueDate : 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) ',
-    //         returnDate: 'Thu Sep 19 2019 00:00:00 GMT+0530 (India Standard Time) '
-    // }
-  ];
+  searchedBook = [  ];
 
   private selectedBook = new BehaviorSubject<object>({});
   private userBooks = new BehaviorSubject<object>({});
@@ -31,7 +20,7 @@ export class ReservationService {
   // tslint:disable-next-line: ban-types
   async getReservedBooks() {
     const  user = JSON.parse(localStorage.getItem('user'));
-    await fetch('https://library-fccj.herokuapp.com/catalog/rentid/' + user._id, {
+    await fetch('/catalog/rentid/' + user._id, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
@@ -39,10 +28,30 @@ export class ReservationService {
     })
     .then(res => res.json())
     .then((response) => {
-      console.log(response);
+      let userIndex = 0;
+      if (response.length !== 0) {
+      for (const element of response) {
+      userIndex = this.getIndexOfUser(element);
+      console.log('user Index' + userIndex);
+      element.currentUserIndex = userIndex;
+      }
+    }
       this.userBooks.next(response);
     });
   }
+
+  getIndexOfUser(response) {
+    this.index = 0;
+    const  user = JSON.parse(localStorage.getItem('user'));
+    for (const element of response.rentedBy) {
+      if (element.ownerID !== user._id) {
+        this.index++;
+      } else {
+        break;
+      }
+    }
+    return this.index;
+}
 
   getReservedBooksOfUser() {
     return this.userBooks.asObservable();
@@ -51,7 +60,7 @@ export class ReservationService {
    async returnReservedBook(id: String) {
     const  user = JSON.parse(localStorage.getItem('user'));
     console.log(id);
-    await fetch('https://library-fccj.herokuapp.com/catalog/release', {
+    await fetch('/catalog/release', {
       method: 'POST',
       body: JSON.stringify({
         bookID: id,
@@ -63,9 +72,7 @@ export class ReservationService {
     })
     .then(response => response.json())
     .then((response) => {
-      console.log(response);
     });
-    this.books = [];
     this.getReservedBooks();
   }
 
@@ -79,7 +86,7 @@ export class ReservationService {
   }
 
   async searchBookByISBN(isbn: string) {
-    await fetch('https://library-fccj.herokuapp.com/catalog/search', {
+    await fetch('/catalog/search', {
       method: 'POST',
       body: JSON.stringify({
         key: 'isbn',
@@ -91,13 +98,11 @@ export class ReservationService {
     })
     .then(response => response.json())
     .then((response) => {
-      console.log('in response');
-      console.log(response);
       this.searchedBook = response;
     });
 
     if ( this.searchedBook.length > 0 && this.searchedBook[0].isbn === isbn) {
-      if ( !this.searchedBook[0].rentedCount) {
+      if ( (this.searchedBook[0].quantity - this.searchedBook[0].rentedCount)) {
          this.reserveBook(this.searchedBook[0]);
       } else {
         const modalRef = this.modal.open(NotificationComponent, { centered: true });
@@ -116,7 +121,15 @@ export class ReservationService {
     console.log('here');
     console.log(book[0]._id);
     const  user = JSON.parse(localStorage.getItem('user'));
-    await fetch('https://library-fccj.herokuapp.com/catalog/rent', {
+    let reserved = false;
+    const rentedUsers = book[0].rentedBy;
+    rentedUsers.forEach( element => {
+      if (element.ownerID === user._id) {
+        reserved = true;
+      }
+    });
+    if (!reserved) {
+    await fetch('/catalog/rent', {
       method: 'POST',
       body: JSON.stringify({
         bookID: book[0]._id,
@@ -130,10 +143,15 @@ export class ReservationService {
     })
     .then(response => response.json())
     .then((response) => {
-      this.books.push(book[0]);
+      const modalRef = this.modal.open(NotificationComponent, { centered: true });
+      modalRef.componentInstance.option = 'reserve';
       this.router.navigate(['reserveDashboard']);
     });
-
+  } else {
+      const modalRef = this.modal.open(NotificationComponent, { centered: true });
+      modalRef.componentInstance.option = 'reservedBySameUser';
+      // alert('already reserved by you.');
+  }
   }
 
 }

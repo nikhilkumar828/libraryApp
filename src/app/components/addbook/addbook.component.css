@@ -1,21 +1,67 @@
-.bookform{
-    margin:5% 0;
+.bookform {
+  margin: 5% 0;
 }
-button{
-    margin-top: 10px;
-    background:  rgb(35, 31, 32)
-}
-.vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    min-height: 50vh; /* These two lines are counted as one :-)       */
-  
-    display: flex;
-    align-items: center;
-  }
-  
-  img {
-    width:280px;
-    height:320px;
-    padding: 10px;
 
+button {
+  margin-top: 10px;
+  background: rgb(35, 31, 32)
+}
+
+.font {
+  font-family: boldFont;
+}
+
+.font-light {
+  font-family: normalfont;
+}
+
+.vertical-center {
+  min-height: 100%;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 60vh;
+  /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center;
+}
+
+.clsBtn {
+  color: green;
+  background-color: transparent;
+  border: 0px;
+  font-size: 25px
+}
+
+img {
+  max-height: 200px;
+}
+
+::placeholder {
+  font-family: lightfont;
+}
+
+@font-face {
+  font-family: boldFont;
+  src: url("../../../assets/OTF/SourceSansPro-Semibold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: lightfont;
+  src: url("../../../assets/OTF/SourceSansPro-Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: normalfont;
+  src: url("../../../assets/OTF/SourceSansPro-Regular.otf") format("opentype");
+}
+
+@media (min-width: 992px) {
+  .upload-image {
+    margin-top: 30%;
+    margin-left: 7%;
   }
+}
+
+.image-section input {
+  font-size: 13px;
+  overflow: hidden;
+}

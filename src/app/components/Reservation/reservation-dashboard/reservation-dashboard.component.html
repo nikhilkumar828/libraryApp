@@ -6,10 +6,10 @@
         <div class="card-body ">
           <div class="row align-items-center h-100">
             <div class="col-sm-8 col-md-6 col-lg-2 col-xl-3 align-self-center">
-              <img src="{{books.image}}" alt="Card image cap" class="rounded imgSize" />
+              <img src="{{books.image}}" alt="Card image cap" class="rounded imgSize border border-dark" />
             </div>
             <div class="col-lg-10 col-xl-9 description">
-              <h6 class="border-bottom border-dark text-uppercase title">{{books.title}}</h6>
+              <h6 class="border-bottom border-dark title">{{books.title}}</h6>
               <p class="details">{{books.description}}</p>
             </div>
           </div>
@@ -31,11 +31,11 @@
           </li>
           <li class="list-group-item text-black-50 border-0 list">
             {{reservation.ISSUE_DATE + reservation.SPACE}}<p
-              class="text-dark">{{books.rentedBy[0].startDate | date}}</p>
+              class="text-dark">{{books.rentedBy[books.currentUserIndex].startDate | date}}</p>
           </li>
           <li class="list-group-item text-black-50 border-0 list">
             {{reservation.RETURN_DATE + reservation.SPACE}}<p
-              class="text-dark">{{getReturnDate(books.rentedBy[0].startDate , books.rentedBy[0].daysToRent) | date}}</p>
+              class="text-dark">{{getReturnDate(books.rentedBy[books.currentUserIndex].startDate , books.rentedBy[books.currentUserIndex].daysToRent) | date}}</p>
           </li>
         </ul>
         <div>

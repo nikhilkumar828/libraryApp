@@ -27,10 +27,14 @@ const routes: Routes = [
     ]
   },
   {
-    path:"",redirectTo:"auth",pathMatch:'full'
+    path:"",
+    redirectTo:"auth",
+    pathMatch:'full'
   },
   {
-    path:"add",component:AddbookComponent
+    path:"add",
+    component:AddbookComponent,
+    canActivate: [ AuthGuard ]
   },
   { path: 'reserveDashboard', component: ReservationDashboardComponent },
   { path: 'reserveBook', component: ReservebookComponent },

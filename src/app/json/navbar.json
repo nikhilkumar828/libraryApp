@@ -1,13 +1,11 @@
 {
     "beforeLoginNavbar": [
-        { "title": "SIGNUP", "url": "auth/signup", "iconClass": "fa-user-plus" },
-        { "title": "LOGIN", "url": "auth/login", "iconClass": "fa-sign-in" }
+        { "title": "Login", "url": "auth/login", "iconClass": "fa-sign-in" },
+        { "title": "Signup", "url": "auth/signup", "iconClass": "fa-user-plus" }
     ],
     "afterLoginNavbar": [
-        { "title": "DASHBOARD", "url": "dashboard", "iconClass": "fa-home" },
-        { "title": "RESERVE", "url": "reserveDashboard", "iconClass": "fa-bookmark" },
-        { "title": "NOTIFICATION", "url": "notification", "iconClass": "fa-bell" },
-        { "title": "ADD-BOOK", "url": "add", "iconClass": "fa-plus" },
-        { "title": "LOGOUT", "url": "logout", "iconClass": "fa-sign-out" }
+        { "title": "Dashbaord", "url": "dashboard", "iconClass": "fa-search" },
+        { "title": "Reserve", "url": "reserveDashboard", "iconClass": "fa-bookmark" },
+        { "title": "Notification", "url": "notification", "iconClass": "fa-bell" }
     ]   
 }

@@ -30,10 +30,14 @@
     font-style: italic;
   }
 .heading{
-  margin-left: 1rem;
+  padding-left: 2vw;
+}
+.side-heading{
+  padding-left: 2vw;
+  font: 1.3rem "Source Sans Pro", "Hiragino Sans GB", "Microsoft JhengHei", arial, helvetica, sans-serif;
 }
 form{
-  margin-top: 10rem;
+  margin-top: 2rem;
 }
 .hyperlink{
   color: black;
@@ -83,4 +87,8 @@ a:hover {
 
 .table > tbody {
   font-size: 1.1rem;
+}
+
+.disabled {
+  color: #464547;
 }

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ReservationService } from '../../Reservation/reservation.service';
 import {AlertComponent} from '../../shared/alert/alert.component';
+import { SearchService } from '../search.service';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -29,7 +30,7 @@ describe('SearchComponent', () => {
     expect(component).toBeTruthy();
   });
   it('fieldSearch should be `ISBN` initially', () => {
-    const component: SearchComponent = new SearchComponent(new ReservationService());
+    const component: SearchComponent = new SearchComponent(new ReservationService(),new SearchService());
     expect(component.fieldSearch).toEqual('ISBN');
   });
   // it('title should be `Search for your book..` initially', () => {

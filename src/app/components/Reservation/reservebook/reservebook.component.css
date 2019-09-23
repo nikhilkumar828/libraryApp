@@ -5,6 +5,14 @@
     min-height: 200px;
 }
 
+::ng-deep .mat-datepicker-toggle {
+    color: rgb(35, 31, 32);
+}
+      
+::ng-deep .mat-calendar-body-selected  {
+    background-color: rgb(35, 31, 32);
+}
+
 
 .text-color{
     color: rgb(35, 31, 32);
@@ -56,6 +64,7 @@
     margin: 0 0 0 0;
 }
 
+
 .input{
     height:4.5em;
 }
@@ -76,10 +85,3 @@
     font-size:14.5px;
 }
 
-::ng-deep .mat-datepicker-toggle {
-  color: rgb(35, 31, 32);
-}
-    
-::ng-deep .mat-calendar-body-selected  {
-    background-color: rgb(35, 31, 32);
-} 

@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './components/dashboard/search/search.component';
-import { FilterContentPipe } from './components/dashboard/filter-content.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
@@ -21,8 +20,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         NavbarComponent,
-        SearchComponent,
-        FilterContentPipe
+        SearchComponent
       ]
     }).compileComponents();
   }));

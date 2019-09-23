@@ -57,8 +57,6 @@ export class ReservebookComponent implements OnInit {
   reserveBook() {
     console.log('book reserved');
     console.log(this.books);
-    const modalRef = this.modal.open(NotificationComponent, { centered: true });
-    modalRef.componentInstance.option = 'reserve';
     // alert('Book Reserved.');
     this.reservationService.reserveBookCall(this.books);
   }

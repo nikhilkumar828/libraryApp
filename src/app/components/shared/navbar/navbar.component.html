@@ -13,21 +13,36 @@
                 
                 <!-- Before Authentication -->
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="!userLoginStatus">
-                    <li class="nav-item" *ngFor="let navLink of beforeLoginNavbar">
-                        <a class="nav-link" routerLink={{navLink.routerLink}}  routerLinkActive="active">
-                            {{ navLink.navTitle }} <em class="fa" [ngClass]="navLink.iconClass"></em>
+                    <li class="nav-item dropdown" ngbDropdown>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle>
+                            <em class="fa fa-user-circle fa-2x"></em>
                         </a>
+                        <div class="dropdown-menu" ngbDropdownMenu>
+                            <a class="dropdown-item" *ngFor="let navLink of beforeLoginNavbar" routerLink={{navLink.routerLink}}  routerLinkActive="active">
+                                <em class="fa" [ngClass]="navLink.iconClass"></em> {{ navLink.navTitle }}
+                            </a>
+                        </div>
                     </li>
                 </ul>
         
                 <!-- After Authentication -->
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="userLoginStatus">
-                    <li class="nav-item" *ngFor="let navLink of afterLoginNavbar">
-                        <a class="nav-link" *ngIf="navLink.navTitle !== 'ADD-BOOK'" routerLink={{navLink.routerLink}} routerLinkActive="active">
-                            {{ navLink.navTitle }} <em class="fa" [ngClass]="navLink.iconClass"></em>
+                    <li class="nav-item dropdown" ngbDropdown>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle>
+                            <em class="fa fa-book fa-2x"></em>
                         </a>
-                        <a class="nav-link" *ngIf="navLink.navTitle === 'ADD-BOOK' && currentUser.username === 'admin@epam.com'" routerLink={{navLink.routerLink}} routerLinkActive="active">
-                            {{ navLink.navTitle }} <em class="fa" [ngClass]="navLink.iconClass"></em>
+                        <div class="dropdown-menu" ngbDropdownMenu>
+                            <a class="dropdown-item" *ngFor="let navLink of afterLoginNavbar" routerLink={{navLink.routerLink}}  routerLinkActive="active">
+                                <em class="fa" [ngClass]="navLink.iconClass"></em> {{ navLink.navTitle }}
+                            </a>
+                            <a class="dropdown-item" routerLink="add"  routerLinkActive="active" *ngIf="currentUser.username === 'admin@epam.com'">
+                                <em class="fa fa-plus"></em> Add Book 
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="logout">
+                            <em class="fa fa-sign-out fa-2x"></em>
                         </a>
                     </li>
                 </ul>

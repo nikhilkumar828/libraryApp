@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     else {
       this.loginForm.removeControl('firstName');
       this.loginForm.removeControl('lastName');
-      this.pageName = "Log In";
+      this.pageName = "Login";
     }
   }
 
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     }
     
     this.submitted = true;
-    if(this.pageName === "Log In") {
+    if(this.pageName === "Login") {
       response = await this.authService.login(this.loginForm.value);
     }
     else {
@@ -78,7 +78,8 @@ export class LoginComponent implements OnInit {
     else {
       await this.showAlert("alert-success", this.pageName + " Succeed !", 1000);
       this.authService.loginSubject.next(true);
-      this.modal.open(NotificationComponent, { centered: true }); 
+      const modalRef = this.modal.open(NotificationComponent, {centered: true, backdropClass: 'no-backdrop' });
+      modalRef.componentInstance.option = 'login';
     }
     return true;
   }
@@ -101,11 +102,11 @@ export class LoginComponent implements OnInit {
   nameValidation(control: string) {
     if(this.loginForm.get(control).value.match('^[a-zA-Z]*$')) {
       this.alphabetValidation[control] = true;
-      return true;
     }
     else {
       this.alphabetValidation[control] = false;
-      return false;
     }
+    this.submitted = !this.alphabetValidation[control];
+    return this.alphabetValidation[control];
   }
 }

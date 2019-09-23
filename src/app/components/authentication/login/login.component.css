@@ -37,3 +37,7 @@ button:disabled {
 .btn.disabled, .btn:disabled {
     opacity: none;
 }
+
+.no-backdrop {
+    background-color: #ffffff;
+  }

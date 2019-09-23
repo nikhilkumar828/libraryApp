@@ -18,6 +18,7 @@ export class ReservationDashboardComponent implements OnInit {
   searchISBN: any = '';
   constructor(private reservationService: ReservationService , public dialog: MatDialog , private modal: NgbModal) { }
   books: any = [];
+  index: number ;
   ngOnInit() {
     this.reservationService.getReservedBooks();
     this.reservationService.getReservedBooksOfUser().subscribe( (bookObj) => {
@@ -25,26 +26,29 @@ export class ReservationDashboardComponent implements OnInit {
     });
   }
 
-  returnBook(id: any) {
-    console.log(id);
-    const modalRef = this.modal.open(NotificationComponent, { centered: true });
-    modalRef.componentInstance.option = 'return';
-    this.reservationService.returnReservedBook(id);
-  }
+
+  //returnBook(id: any) {
+  //  console.log(id);
+  //  const modalRef = this.modal.open(NotificationComponent, { centered: true });
+  //  modalRef.componentInstance.option = 'return';
+  //  this.reservationService.returnReservedBook(id);
+  // }
 
   searchBook(isbn: string) {
     this.reservationService.searchBookByISBN(isbn);
   }
 
   confirmationPopUp(id: any) {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-        data: 'Do you want to Return the book?'
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.returnBook(id);
-        }
-      });
+      const modalRef = this.modal.open(NotificationComponent, { centered: true });
+      modalRef.componentInstance.option = id;
+      //const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      //  data: 'Do you want to Return the book?'
+      //});
+      //dialogRef.afterClosed().subscribe(result => {
+      //  if (result) {
+      //    this.returnBook(id);
+      //  }
+      //});
   }
 
   getReturnDate( Issuedate , noOfDays) {

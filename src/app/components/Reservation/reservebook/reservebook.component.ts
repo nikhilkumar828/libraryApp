@@ -59,6 +59,7 @@ export class ReservebookComponent implements OnInit {
     console.log(this.books);
     // alert('Book Reserved.');
     this.reservationService.reserveBookCall(this.books);
+    this.reservationService.sendEmail(this.books);
   }
 
 }

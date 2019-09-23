@@ -154,4 +154,22 @@ export class ReservationService {
   }
   }
 
+  async sendEmail(books:any){
+    const  user = JSON.parse(localStorage.getItem('user'));
+     await fetch('/mail', {
+      method: 'POST',
+      body: JSON.stringify({
+        id: user._id,
+        subject:'Successfully Reserved a New Book',
+        message: '<html>,<br>Thank you for reserving a new book. You have successfully reserved the book '+books[0].title+' and the return date is ' + books[0].returnDate.toLocaleDateString()+ '.<br> Thank you.</html>'
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+    .then(res => res.json())
+    .then(console.log)
+    
+  }
+
 }

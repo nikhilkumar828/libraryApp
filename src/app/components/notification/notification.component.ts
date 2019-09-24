@@ -117,7 +117,7 @@ export class NotificationComponent implements OnInit {
 
     else if(this.option=='login'){
       this.router.navigateByUrl('dashboard');
-      fetch('/catalog/rentid/' + this.user_id, {
+      fetch('https://library-fccj.herokuapp.com/catalog/rentid/' + this.user_id, {
             method: 'GET',
             headers: {
           'Content-type': 'application/json; charset=UTF-8'

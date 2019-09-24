@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../reservation.service';
 import { reservation } from '../reservationsconstants';
 import { MatDialog } from '@angular/material';
-import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 import { NotificationComponent } from '../../notification/notification.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 

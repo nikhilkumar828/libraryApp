@@ -18,7 +18,7 @@ export class SearchService {
 	async getData() {
 		this.isLoading=true;
 		this.newData = true;
-		await fetch('/catalog/search', {
+		await fetch('https://library-fccj.herokuapp.com/catalog/search', {
 			method: 'POST',
 			body: JSON.stringify({
 			  key: 'year',
@@ -55,7 +55,7 @@ export class SearchService {
 	 async getSearchData() {
 		this.isLoading=true;
 		this.newData = false;
-		 await fetch('/catalog/search', {
+		 await fetch('https://library-fccj.herokuapp.com/catalog/search', {
 			method: 'POST',
 			body: JSON.stringify({
 			  key: this.fieldSearch,

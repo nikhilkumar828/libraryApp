@@ -27,13 +27,6 @@ export class ReservationDashboardComponent implements OnInit {
   }
 
 
-  //returnBook(id: any) {
-  //  console.log(id);
-  //  const modalRef = this.modal.open(NotificationComponent, { centered: true });
-  //  modalRef.componentInstance.option = 'return';
-  //  this.reservationService.returnReservedBook(id);
-  // }
-
   searchBook(isbn: string) {
     this.reservationService.searchBookByISBN(isbn);
   }
@@ -41,17 +34,9 @@ export class ReservationDashboardComponent implements OnInit {
   confirmationPopUp(id: any) {
       const modalRef = this.modal.open(NotificationComponent, { centered: true });
       modalRef.componentInstance.option = id;
-      //const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      //  data: 'Do you want to Return the book?'
-      //});
-      //dialogRef.afterClosed().subscribe(result => {
-      //  if (result) {
-      //    this.returnBook(id);
-      //  }
-      //});
   }
 
-  getReturnDate( Issuedate , noOfDays) {
+  getReturnDate( Issuedate: any , noOfDays: number) {
     const date = new Date(Issuedate);
     date.setDate( date.getDate() + noOfDays );
     return date;

@@ -1,6 +1,7 @@
+<div *ngIf="books.length else noBooks">
 <div class="container">
   <h2 class="text-center text-color">{{reservation.RESERVE_BOOK_Title}}</h2>
-  <div *ngFor="let books of books" class="row">
+  <div *ngFor="let books of books;let i = index" class="row">
     <div class="card col-12 col-md-12 col-lg-8 col-xl-10 ">
       <div class="card-body ">
         <div class="row align-items-center h-100">
@@ -29,23 +30,30 @@
         </li>
         <li class="list-group-item input text-black-50 border-0 list">
           {{reservation.ISSUE_DATE + reservation.SPACE}}<br>
-          <input class="inputWidth" name="issueDate" [(ngModel)]="issueDate" [matDatepicker]="startDatepicker"
-            [min]="issueMinDate" (dateInput)="setIssueDate($event.value)" disabled>
-          <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
-          <mat-datepicker #startDatepicker disabled="false"></mat-datepicker>
+          <input class="inputWidth" name="issueDate" [ngModel]="myDate" disabled>
+          <!-- <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatepicker disabled="false"></mat-datepicker> -->
         </li>
         <li class="list-group-item input text-black-50 border-0 list">
           {{reservation.RETURN_DATE + reservation.SPACE}}<br><input class="inputWidth" name="returnDate"
             [matDatepicker]="endDatepicker" [min]="returnMinDate" [max]="returnMaxDate"
-            (dateInput)="setReturnDate($event.value)" [(ngModel)]="returnDate" disabled>
+            (dateInput)="setReturnDate($event.value,i)" [(ngModel)]="returnDate" disabled>
           <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
         </li>
       </ul>
       <div class="button">
-        <button (click)="reserveBook()" [disabled]="!returnDate || !issueDate"
-          class="btn bg-dark text-white w-100">{{reservation.RESERVE_BOOK}}</button>
+        <button (click)="removeBook(i)"
+          class="btn bg-dark text-white w-100">{{reservation.REMOVE_BOOK}}</button>
       </div>
     </div>
   </div>
 </div>
+<div class="button mt-2 button-width">
+    <button (click)="reserveBook()"
+      class="btn bg-dark text-white w-100">{{reservation.RESERVE_BOOK}}</button>
+  </div>
+</div>
+<ng-template #noBooks>
+    <h2 class="text-center text-color mt-4">{{reservation.CART_EMPTY}}</h2>
+</ng-template>

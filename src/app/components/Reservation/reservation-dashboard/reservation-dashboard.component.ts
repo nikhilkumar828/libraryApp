@@ -55,8 +55,6 @@ export class ReservationDashboardComponent implements OnInit {
    * @param id - book_id
    */
   confirmationPopUp(id: any) {
-      //const modalRef = this.modal.open(NotificationComponent, { centered: true });
-      //modalRef.componentInstance.option = id;
 
     Swal.fire({
         title: 'Are you sure?',
@@ -66,20 +64,21 @@ export class ReservationDashboardComponent implements OnInit {
         confirmButtonColor: '#008ACE',
         cancelButtonColor: '#D35D47',
         confirmButtonText: 'Yes, return it!',
-        
+
       }).then((result) => {
         if (result.value) {
           let total = 0;
-          if(this.notificationService.total.getValue()>0)
-          {
-            total=this.notificationService.total.getValue() - 1;
+          if (this.notificationService.total.getValue() > 0) {
+            total = this.notificationService.total.getValue() - 1;
           }
           console.log('in reservation component, at return, total is ', total);
           this.notificationService.setNotificationCount(total);
           this.reservationService.returnReservedBook(id);
-          let notifCount = parseInt(localStorage.getItem('NotifCount'))
-          if(notifCount>0)
+          // tslint:disable-next-line: radix
+          let notifCount = parseInt(localStorage.getItem('NotifCount'));
+          if (notifCount > 0) {
             notifCount = notifCount - 1;
+          }
           localStorage.setItem('NotifCount', String(notifCount)) ;
           Swal.fire({
             position: 'center',

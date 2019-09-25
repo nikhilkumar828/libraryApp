@@ -87,3 +87,8 @@
 .details {
   font-size: 14.5px;
 }
+
+.button-width {
+  margin: auto;
+  width: 60%;
+}

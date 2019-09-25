@@ -12,7 +12,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ReservebookComponent implements OnInit {
   public reservation = reservation;
   books: any = [];
-  myDate: Date = new Date();
+  myDate: string;
+  presentDate: Date =  new Date();
   issueMinDate: Date;
   returnMinDate: Date;
   returnMaxDate: Date;
@@ -30,46 +31,39 @@ export class ReservebookComponent implements OnInit {
    * @description - used to subscribe to the book user want to reserve and setting the min issue and return date
    */
   ngOnInit() {
-    this.reservationService.getBookToReserve().subscribe(bookObj => {
-      this.books.push(bookObj);
+    this.reservationService.getBookToReserve().subscribe(booksObj => {
+      this.books = booksObj;
     });
-    this.issueMinDate = new Date(
-      this.myDate.getFullYear(),
-      this.myDate.getMonth(),
-      this.myDate.getDate()
-    );
+    if (this.books.length) {
+    this.myDate = this.presentDate.toLocaleDateString();
+    for (const book of this.books) {
+      book.issueDate = this.presentDate;
+    }
     this.returnMinDate = new Date(
-      this.myDate.getFullYear(),
-      this.myDate.getMonth(),
-      this.myDate.getDate()
+      this.presentDate.getFullYear(),
+      this.presentDate.getMonth(),
+      this.presentDate.getDate()
     );
-  }
-
-  /**
-   * Sets issue date
-   * @param event - selected issuedate
-   * @description - takes  the selected issue date and calculates validation for return date and sets its issue date
-   */
-  setIssueDate(event: any) {
-    this.returnMinDate = event;
-
     this.returnMaxDate = new Date(
-      event.getFullYear(),
-      event.getMonth(),
-      event.getDate() + 14
+      this.presentDate.getFullYear(),
+      this.presentDate.getMonth(),
+      this.presentDate.getDate() + 14
     );
-    this.returnDate = '';
-    this.books[0].issueDate = event;
+    }
   }
+
+
 
   /**
    * Sets return date
    * @param event - selected returndate
    * @description - sets the return date of the book
    */
-  setReturnDate(event: any) {
+  setReturnDate(event: any, index) {
     // this.reservationService.books[0].returnDate = event.getMonth() + 1 + '/' + event.getDate() + '/' + event.getFullYear();
-    this.books[0].returnDate = event;
+    for (const book of this.books) {
+      book.returnDate = event;
+    }
   }
 
   /**
@@ -78,5 +72,9 @@ export class ReservebookComponent implements OnInit {
    */
   reserveBook() {
     this.reservationService.reserveBookCall(this.books);
+  }
+
+  removeBook(i) {
+    this.books.splice(i, 1);
   }
 }

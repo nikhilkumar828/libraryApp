@@ -11,6 +11,7 @@ export class ReservationService {
   books = [];
   index: any;
   searchedBook = [];
+  cartBooks = [];
   private selectedBook = new BehaviorSubject<object>({});
   private userBooks = new BehaviorSubject<object>({});
 
@@ -97,9 +98,47 @@ export class ReservationService {
    * @param book - book object
    * @description - from dashboard when user clicks reserve on a particular book it sends the book object and navigates to reserveBook page
    */
-  reserveBook(book: object) {
-    this.selectedBook.next(book);
-    // this.router.navigate(['reserveBook']);
+  reserveBook(book) {
+  if ( this.cartBooks.length <= 4 ) {
+    let reserved = false;
+    let presentInCart = false;
+    const user = JSON.parse(localStorage.getItem('user'));
+    const rentedUsers = book.rentedBy;
+    for (const element of rentedUsers) {
+      if (element.ownerID === user._id) {
+        reserved = true;
+      }
+    }
+    if (!reserved) {
+    for (const element of this.cartBooks) {
+      if (element._id === book._id) {
+        presentInCart = true;
+      }
+    }
+    if (!presentInCart) {
+    this.cartBooks.push(book);
+    this.selectedBook.next(this.cartBooks);
+  } else {
+    // const modalRef = this.modal.open(NotificationComponent, {
+    //   centered: true
+    // });
+    // modalRef.componentInstance.option = 'alreadyInCart';
+    alert('Already present in cart.');
+  }
+    } else {
+      const modalRef = this.modal.open(NotificationComponent, {
+        centered: true
+      });
+      modalRef.componentInstance.option = 'reservedBySameUser';
+    }
+  } else {
+    // const modalRef = this.modal.open(NotificationComponent, {
+    //   centered: true
+    // });
+    // modalRef.componentInstance.option = 'cartFull';
+    alert('Cart is full');
+  }
+
   }
 
   /**
@@ -153,46 +192,37 @@ export class ReservationService {
    * @param book - book object
    * @description - API call to reserve the book
    */
-  async reserveBookCall(book: object) {
+  async reserveBookCall(books) {
+    for (const book of books) {
     const diffInMs: number =
-      Date.parse(book[0].returnDate) - Date.parse(book[0].issueDate);
+    Date.parse(book.returnDate) - Date.parse(book.issueDate);
     const days = diffInMs / (1000 * 3600 * 24);
     const user = JSON.parse(localStorage.getItem('user'));
-    let reserved = false;
-    const rentedUsers = book[0].rentedBy;
-    rentedUsers.forEach(element => {
-      if (element.ownerID === user._id) {
-        reserved = true;
-      }
-    });
-    if (!reserved) {
-      await fetch('https://library-fccj.herokuapp.com/catalog/rent', {
+    await fetch('https://library-fccj.herokuapp.com/catalog/rent', {
         method: 'POST',
         body: JSON.stringify({
-          bookID: book[0]._id,
+          bookID: book._id,
           ownerID: user._id,
-          startDate: book[0].issueDate,
-          daysToRent: days
+          startDate: book.issueDate,
+          daysToRent: Math.ceil(days)
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8'
         }
       })
         .then(response => response.json())
-        .then(response => {
-          const modalRef = this.modal.open(NotificationComponent, {
-            centered: true
-          });
-          modalRef.componentInstance.option = 'reserve';
-          this.router.navigate(['reserveDashboard']);
-          this.sendEmail(book);
+        .catch(err => {
+          console.log(err);
         });
-    } else {
-      const modalRef = this.modal.open(NotificationComponent, {
-        centered: true
-      });
-      modalRef.componentInstance.option = 'reservedBySameUser';
     }
+    const modalRef = this.modal.open(NotificationComponent, {
+      centered: true
+    });
+    modalRef.componentInstance.option = 'reserve';
+    this.cartBooks = [];
+    this.selectedBook.next(this.cartBooks);
+    this.router.navigate(['reserveDashboard']);
+    this.sendEmail(books);
   }
 
   /**
@@ -201,23 +231,26 @@ export class ReservationService {
    * @description - sends email to user on reservation of a book
    */
   async sendEmail(books: any) {
+    let mockBookString = '<ul>';
+    for (const book of books ) {
+      mockBookString +=  '<li>' + book.title + '</li>';
+    }
+    mockBookString = mockBookString + '</ul>';
     const user = JSON.parse(localStorage.getItem('user'));
     await fetch('https://library-fccj.herokuapp.com/mail', {
       method: 'POST',
       body: JSON.stringify({
         id: user._id,
-        subject: 'Successfully Reserved a Book',
-        // tslint:disable-next-line: max-line-length
-        message:
-          '<html>,<br>Thank you for reserving a book. You have successfully reserved the book ' +
-          books[0].title +
-          ' and the return date is ' +
-          books[0].returnDate.toLocaleDateString() +
-          '.<br> Thank you.</html>'
-      }),
+        subject: 'Successfully Reserved Book(s)',
+         message:
+          // tslint:disable-next-line: max-line-length
+          '<html>Thank you for using EPAM Library. You have successfully reserved the following book(s):-<br>' + mockBookString + '<br><br>Thank You.'
+     }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
       }
     }).then(res => res.json());
   }
+
 }
+

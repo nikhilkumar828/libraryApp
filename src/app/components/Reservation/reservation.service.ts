@@ -201,20 +201,24 @@ export class ReservationService {
    * @description - sends email to user on reservation of a book
    */
   async sendEmail(books: any) {
+    let mockBookString:string="";
+    let mockBook:any = [{title:'In Search of Lost Time'},
+                        {title:'Ulysses'},
+                        {title:'The Great Gatsby'},
+                        {title:'Don Quixote'}];
+    for(let book of mockBook ){
+      mockBookString=mockBookString+"\n"+book.title;
+    }
     const user = JSON.parse(localStorage.getItem('user'));
     await fetch('https://library-fccj.herokuapp.com/mail', {
       method: 'POST',
       body: JSON.stringify({
         id: user._id,
-        subject: 'Successfully Reserved a Book',
+        subject: 'Successfully Reserved Book(s)',
         // tslint:disable-next-line: max-line-length
-        message:
-          '<html>,<br>Thank you for reserving a book. You have successfully reserved the book ' +
-          books[0].title +
-          ' and the return date is ' +
-          books[0].returnDate.toLocaleDateString() +
-          '.<br> Thank you.</html>'
-      }),
+         message:
+          '<html>,<br>Thank you for using EPAM Library. You have successfully reserved the following book(s):-<br>'+mockBookString+'<br>Thank You.'
+     }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
       }

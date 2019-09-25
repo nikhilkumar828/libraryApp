@@ -173,6 +173,7 @@ export class ReservationService {
     if (this.searchedBook.length > 0 && this.searchedBook[0].isbn === isbn) {
       if (this.searchedBook[0].quantity - this.searchedBook[0].rentedCount) {
         this.reserveBook(this.searchedBook[0]);
+        this.router.navigate(['reserveBook']);
       } else {
         const modalRef = this.modal.open(NotificationComponent, {
           centered: true

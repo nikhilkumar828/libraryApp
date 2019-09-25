@@ -2,7 +2,7 @@
     <div class="container">
       <form>
         <div class="row text-align-center">
-          <h2 class="heading">Search for your book..</h2>
+          <h2 class="heading">{{title}}</h2>
         </div>
         <div class="row search-bar">
   
@@ -23,8 +23,8 @@
         </div>
 
         <div class="row">
-          <h1 class ="side-heading" *ngIf="(ss.newData && ss.searchData.length === 0) || (ss.resetData && ss.newData)">Here are 2019 books!!</h1>
-          <h1 class ="side-heading" *ngIf="(!ss.newData && ss.searchData.length>=4) || !ss.reset1">Here are the searched results</h1>
+          <h1 class ="side-heading" *ngIf="(ss.isNewData && ss.searchData.length === 0) || (ss.resetData && ss.isNewData)">Here are the latest books!!</h1>
+          <h1 class ="side-heading" *ngIf="(!ss.isNewData && ss.searchData.length>=4 ) || !ss.resetResult">Here are the searched results</h1>
         </div>
   
       </form>
@@ -32,39 +32,14 @@
       <app-alert *ngIf="(ss.booksData.length === 0 && ss.searchData.length>=4 && ss.isLoading === false)"
                   [errorData]="errorData"
       ></app-alert>
-      <app-alert *ngIf="ss.searchData.length>=1 && 3>=ss.searchData.length"
+      <app-alert *ngIf="ss.searchData.length>=1 && 3>=ss.searchData.length && ss.alertData"
                   [errorData]="alertData">
 
       </app-alert>
-      <!-- <div *ngIf="(fieldSearch!='year' && searchData.length>=3) ||(fieldSearch=='year' && searchData.length>3 )" class="table-responsive">
-        <table *ngIf="(ss.booksData | filterContent: searchData:fieldSearch).length > 0" class="table table-striped table-bordered">
-          <thead>
-            <th class="table-heading" *ngFor="let searchfield of searchFields">{{ searchfield | uppercase }}</th>
-          </thead>
-  
-          <tbody class="hyperlink">
-            <tr *ngFor="
-                let book of ss.booksData | filterContent: searchData:fieldSearch;">
-              <td>{{ book.isbn }}</td>
-              <td><img class="imageData"src="{{book.image}}">{{book.title }}</td>
-              <td>{{ book.author }}</td>
-              <td>{{ book.year }}</td>
-              <td class="text-center">
-                <button type="button" class="btn btn-success" [class.disabled]="isDisabled"
-                [disabled] = '(book.quantity - book.rentedCount) === 0'
-                [routerLink]="['/reserveBook']" (click) = 'reserveBook(book)'>
-                    Reserve
-                </button>
-                <p class="font-italic text-muted available"><strong>{{book.quantity - book.rentedCount}}</strong> books available</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
-      <div *ngIf="ss.isLoading;else login_content" class="d-flex justify-content-center">
+      <div *ngIf="ss.isLoading;else loader_content" class="d-flex justify-content-center">
           <app-loader></app-loader>
       </div>
-      <ng-template #login_content>
+      <ng-template #loader_content>
       <div class="table-responsive">
         <table *ngIf="ss.booksData.length > 0" class="table table-striped table-bordered">
           <thead>
@@ -75,17 +50,21 @@
           <tbody class="hyperlink">
             <tr *ngFor="
                 let book of ss.booksData">
-              <td>{{ book.isbn }}</td>
-              <td><img class="imageData"src="{{book.image}}">{{book.title }}</td>
+              <td  x-ms-format-detection="none">{{ book.isbn }}</td>
+              <td><img class="imageData" src="{{book.image}}"></td>
+              <td>{{book.title }}</td>
               <td>{{ book.author }}</td>
               <td>{{ book.year }}</td>
               <td class="text-center">
-                <button type="button" class="btn btn-success" [class.disabled]="isDisabled"
+                <button type="button" class="btn btn-success" [class.disabled]="(book.quantity - book.rentedCount) === 0"
                 [disabled] = '(book.quantity - book.rentedCount) === 0'
                 [routerLink]="['/reserveBook']" (click) = 'reserveBook(book)'>
                     Reserve
                 </button>
-                <p class="font-italic text-muted available"><strong>{{book.quantity - book.rentedCount}}</strong> books available</p>
+                <p class="font-italic text-muted available"><strong *ngIf="book.quantity - book.rentedCount!==0">{{book.quantity - book.rentedCount}}</strong>
+                  <span *ngIf="book.quantity - book.rentedCount===0" > not available </span>
+                  <span *ngIf="book.quantity - book.rentedCount===1" > book available </span>
+                  <span *ngIf="book.quantity - book.rentedCount>1" > books available </span></p>
               </td>
             </tr>
           </tbody>

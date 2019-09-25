@@ -1,7 +1,7 @@
 <div class="container">
-    <h2 class="text-center text-color">{{reservation.RESERVE_BOOK_Title}}</h2>
+  <h2 class="text-center text-color">{{reservation.RESERVE_BOOK_Title}}</h2>
   <div *ngFor="let books of books" class="row">
-    <div class="card col-12 col-md-12 col-lg-8 col-xl-10 " >
+    <div class="card col-12 col-md-12 col-lg-8 col-xl-10 ">
       <div class="card-body ">
         <div class="row align-items-center h-100">
           <div class="col-sm-8 col-md-6 col-lg-2 col-xl-3 align-self-center">
@@ -25,26 +25,25 @@
             {{books.author}}</p>
         </li>
         <li class="list-group-item text-black-50 border-0 list">
-          {{reservation.RELEASE_YEAR + reservation.SPACE}}<p
-            class="text-dark">{{books.year}}</p>
+          {{reservation.RELEASE_YEAR + reservation.SPACE}}<p class="text-dark">{{books.year}}</p>
         </li>
         <li class="list-group-item input text-black-50 border-0 list">
-        {{reservation.ISSUE_DATE + reservation.SPACE}}<br>
-        <input class="inputWidth" name="issueDate" [(ngModel)]="issueDate" [matDatepicker]="startDatepicker"
-          [min]="issueMinDate" (dateInput)="setIssueDate($event.value)" disabled>
+          {{reservation.ISSUE_DATE + reservation.SPACE}}<br>
+          <input class="inputWidth" name="issueDate" [(ngModel)]="issueDate" [matDatepicker]="startDatepicker"
+            [min]="issueMinDate" (dateInput)="setIssueDate($event.value)" disabled>
           <mat-datepicker-toggle [for]="startDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #startDatepicker disabled="false"></mat-datepicker>
         </li>
         <li class="list-group-item input text-black-50 border-0 list">
-        {{reservation.RETURN_DATE + reservation.SPACE}}<br><input
-          class="inputWidth" name="returnDate" [matDatepicker]="endDatepicker" [min]="returnMinDate"
-          [max]="returnMaxDate" (dateInput)="setReturnDate($event.value)" [(ngModel)]="returnDate" disabled>
+          {{reservation.RETURN_DATE + reservation.SPACE}}<br><input class="inputWidth" name="returnDate"
+            [matDatepicker]="endDatepicker" [min]="returnMinDate" [max]="returnMaxDate"
+            (dateInput)="setReturnDate($event.value)" [(ngModel)]="returnDate" disabled>
           <mat-datepicker-toggle [for]="endDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #endDatepicker disabled="false"></mat-datepicker>
         </li>
       </ul>
       <div class="button">
-          <button (click)="reserveBook()" [disabled]="!returnDate || !issueDate"
+        <button (click)="reserveBook()" [disabled]="!returnDate || !issueDate"
           class="btn bg-dark text-white w-100">{{reservation.RESERVE_BOOK}}</button>
       </div>
     </div>

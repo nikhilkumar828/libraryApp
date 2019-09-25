@@ -3,12 +3,11 @@ import { NotificationService } from '../notification.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
-import { ReservationService } from '../Reservation/reservation.service';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
+  styleUrls: ['./notification.component.css'],
 })
 export class NotificationComponent implements OnInit {
 
@@ -25,7 +24,7 @@ export class NotificationComponent implements OnInit {
   user_id='';
   empty=true;
   
-  constructor(private reservationService: ReservationService, public modal: NgbActiveModal,private notification:NotificationService, public router: Router) {
+  constructor(public modal: NgbActiveModal,private notificationService:NotificationService, public router: Router) {
     this.user_id = (JSON.parse(localStorage.getItem('user'))['_id']);
    }
   
@@ -60,6 +59,12 @@ export class NotificationComponent implements OnInit {
     }
 
     else if(this.option=='reserve'){
+      this.total=this.notificationService.total.getValue() + 1;
+      console.log('in notification component, at reserve, total is ', this.total);
+      this.notificationService.setNotificationCount(this.total);
+      let notifCount = parseInt(localStorage.getItem('NotifCount'))
+      notifCount = notifCount + 1;
+      localStorage.setItem('NotifCount', String(notifCount)) ;
       Swal.fire({
         position: 'center',
         type: 'success',
@@ -131,14 +136,18 @@ export class NotificationComponent implements OnInit {
                 this.due_days.push(res[index].rentedBy[0].daysToRent);
                 this.start_date.push(res[index].rentedBy[0].startDate.substring(0, 10));
                 var tempdate = new Date();
+                console.log('start_dates are: ',this.start_date);
                 tempdate.setDate(new Date(this.start_date[index]).getDate() + this.due_days[index]);
                 this.return_date.push(String(tempdate).substring(0, 15));
               }
                 this.total = res.length;
                 console.log('res.length is ', res.length);
                 console.log('total is ', this.total);
+                localStorage.setItem('NotifCount', String(this.total)) ;
                 if(this.total!=0){
-                  this.name = (JSON.parse(localStorage.getItem('user'))['firstName'])
+                  this.notificationService.setNotificationCount(this.total);
+                  this.name = (JSON.parse(localStorage.getItem('user'))['firstName']);
+                  
                   Swal.fire({
                     width: 200,
                     position: "bottom-right",
@@ -159,41 +168,11 @@ export class NotificationComponent implements OnInit {
                   })
                 }
                 else{
+                  this.notificationService.setNotificationCount(0);
                   this.modal.close('Ok click');
                 }
             }); 
 
-    }
-    else{
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#008ACE',
-        cancelButtonColor: '#D35D47',
-        confirmButtonText: 'Yes, return it!',
-        
-        onClose: () => {
-          console.log('closed :)');
-          this.modal.close('Ok click')
-        }
-      }).then((result) => {
-        if (result.value) {
-          this.reservationService.returnReservedBook(this.option);
-          Swal.fire({
-            position: 'center',
-            type: 'success',
-            title: 'Successfully returned!',
-            showConfirmButton: false,
-            timer: 1500,
-            onClose: () => {
-              console.log('closed :)');
-              this.modal.close('Ok click')
-            }
-          });
-        }
-      })
     }
 
   }

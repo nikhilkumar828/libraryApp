@@ -6,6 +6,7 @@
     "afterLoginNavbar": [
         { "title": "Dashbaord", "url": "dashboard", "iconClass": "fa-search" },
         { "title": "Reserve", "url": "reserveDashboard", "iconClass": "fa-bookmark" },
-        { "title": "Notification", "url": "notification", "iconClass": "fa-bell" }
+        { "title": "Notification", "url": "notification", "iconClass": "fa-bell" },
+        { "title": "Feedback", "url": "feedback", "iconClass": "fa-comments" }
     ]   
 }

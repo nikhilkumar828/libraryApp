@@ -12,12 +12,12 @@
             <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
                 
                 <!-- Before Authentication -->
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="!userLoginStatus">
-                    <li class="nav-item dropdown" ngbDropdown>
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle>
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0 navbar-login" *ngIf="!userLoginStatus">
+                    <li class="nav-item dropdown" [className]="'.navbar-login'" appDropdown>
+                        <a class="nav-link dropdown-toggle">
                             <em class="fa fa-user-circle fa-2x"></em>
                         </a>
-                        <div class="dropdown-menu" ngbDropdownMenu>
+                        <div class="dropdown-menu">
                             <a class="dropdown-item" *ngFor="let navLink of beforeLoginNavbar" routerLink={{navLink.routerLink}}  routerLinkActive="active">
                                 <em class="fa" [ngClass]="navLink.iconClass"></em> {{ navLink.navTitle }}
                             </a>
@@ -26,24 +26,38 @@
                 </ul>
         
                 <!-- After Authentication -->
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="userLoginStatus">
-                    <li class="nav-item dropdown" ngbDropdown>
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle>
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0 navbar-menu" *ngIf="userLoginStatus">
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" routerLink="./reserveBook" routerLinkActive="active">
+                            <em class="fa fa-shopping-cart fa-2x"></em>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" [className]="'.navbar-menu'" appDropdown>
+                        <a class="nav-link dropdown-toggle">
                             <em class="fa fa-book fa-2x"></em>
                         </a>
-                        <div class="dropdown-menu" ngbDropdownMenu>
+                        <div class="dropdown-menu">
                             <a class="dropdown-item" *ngFor="let navLink of afterLoginNavbar" routerLink={{navLink.routerLink}}  routerLinkActive="active">
                                 <em class="fa" [ngClass]="navLink.iconClass"></em> {{ navLink.navTitle }}
+                                <span class="badge" *ngIf="navLink.navTitle === 'Notification'&& count != 0">{{count}}</span>
                             </a>
-                            <a class="dropdown-item" routerLink="add"  routerLinkActive="active" *ngIf="currentUser.username === 'admin@epam.com'">
+                            <a class="dropdown-item" routerLink="add"  routerLinkActive="active" *ngIf="currentUser.admin">
                                 <em class="fa fa-plus"></em> Add Book 
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" routerLink="logout">
+                    <span class="badge" *ngIf = "count != 0">{{count}}</span>
+                </ul>
+                <ul class="navbar-nav mt-2 mt-lg-0 navbar-logout" *ngIf="userLoginStatus">
+                    <li class="nav-item dropdown" [className]="'.navbar-logout'" appDropdown>
+                        <a class="nav-link dropdown-toggle">
                             <em class="fa fa-sign-out fa-2x"></em>
                         </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" routerLink="logout"  routerLinkActive="active">
+                                <em class="fa fa-sign-out"></em> Logout
+                            </a>
+                        </div>
                     </li>
                 </ul>
             </div>

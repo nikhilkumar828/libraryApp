@@ -6,18 +6,22 @@ import { Injectable } from '@angular/core';
 })
 export class SearchService {
 	searchData: string = '';
-	booksData = [];
-	isLoading:boolean=false;
-	newData:boolean = false;
-	resetData:boolean = false;
-	reset1:boolean =true;
 	fieldSearch: string = 'isbn';
+	booksData = [];
+	booksData2019 = [];
+	time=null;	
+	isLoading:boolean=false;
+	isNewData:boolean = false;
+	resetData:boolean = false;
+	resetResult:boolean =true;
+	alertData:boolean =  true;
+
 	constructor() {}
 
 
 	async getData() {
 		this.isLoading=true;
-		this.newData = true;
+		this.isNewData = true;
 		await fetch('https://library-fccj.herokuapp.com/catalog/search', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -30,22 +34,21 @@ export class SearchService {
 		  })
 		  .then(res => res.json())
 		  .then(data => {
-			  console.log(data);
 			this.booksData = data;
-			  
+			this.booksData2019 = data;
 		  })
 		  this.isLoading=false;
 	}
 
 	setData(event:any) {
-		
 		this.searchData = event.target.value ;
-		console.log(this.searchData);
-		if(this.searchData.length>3){
+		if(this.searchData.length>=4)
+        {
 		this.getSearchData();
 		}
 		else if(this.searchData.length == 0){
-			this.getData();
+			this.booksData = this.booksData2019;
+			this.isNewData = true;
 		}
 		else{
 			this.booksData = [];
@@ -54,7 +57,8 @@ export class SearchService {
 	}
 	 async getSearchData() {
 		this.isLoading=true;
-		this.newData = false;
+		this.isNewData = false;
+		this.alertData =true;
 		 await fetch('https://library-fccj.herokuapp.com/catalog/search', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -67,17 +71,17 @@ export class SearchService {
 		  })
 		  .then(res => res.json())
 		  .then(data => {
-			  console.log('received data: ', data)
 			  this.booksData = data;
 		  })
 		  this.isLoading=false;
 	 }
 	setField(fieldSearch: string) {
 		this.fieldSearch = fieldSearch;
-		this.newData=true;
+		this.isNewData=true;
 		this.resetData = true;
-		this.reset1 = true;
-		this.getData();
+		this.resetResult = true;
+		this.alertData = false;
+		this.booksData = this.booksData2019;
 
 	}
 

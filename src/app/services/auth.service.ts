@@ -11,13 +11,13 @@ export class AuthService {
   loginSubject = new BehaviorSubject(false);
 
   constructor(public router: Router, private searchService: SearchService) {
-    if(this.isLoggedIn()) {
+    if (this.isLoggedIn()) {
       this.loginSubject.next(true);
       this.router.navigate(['dashboard']);
     }
   }
 
-  async signup(signupData: { email: string, password: string, firstName: string, lastName:string }) {
+  async signup(signupData: { email: string, password: string, firstName: string, lastName: string }) {
     return await fetch('https://library-fccj.herokuapp.com/users/register', {
       method: 'POST',
       body: JSON.stringify({
@@ -33,7 +33,7 @@ export class AuthService {
     .then(response => response.json())
     .then((response) => {
       return response;
-    })
+    });
   }
 
   async login(loginData: { email: string, password: string } ) {
@@ -53,6 +53,18 @@ export class AuthService {
     });
   }
 
+  async generateLink(email: string) {
+    return await fetch(`https://library-fccj.herokuapp.com/users/forgot-password/${email}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+    .then((response) => {
+      return response;
+    });
+  }
+
   async logout() {
     localStorage.removeItem('user');
     this.loginSubject.next(false);
@@ -67,8 +79,8 @@ export class AuthService {
   }
 
   setUserCredentials(response) {
-    if(!response.hasOwnProperty('message')) {
-      localStorage.setItem("user", JSON.stringify(response));
+    if (!response.hasOwnProperty('message')) {
+      localStorage.setItem('user', JSON.stringify(response));
       this.isLoggedIn();
     }
     return response;
@@ -76,5 +88,23 @@ export class AuthService {
 
   getLoggedInUser() {
     return this.user;
+  }
+
+  async changePassword(email: string, password: string, code: string) {
+    return await fetch('https://library-fccj.herokuapp.com/users/reset-password', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: email,
+        password,
+        code
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+      }
+    })
+    .then(response => response.json())
+    .then((response) => {
+      return response;
+    });
   }
 }

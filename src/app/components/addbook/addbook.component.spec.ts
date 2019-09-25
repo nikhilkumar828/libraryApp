@@ -22,9 +22,9 @@ describe('AddbookComponent', () => {
   it('should create the app', () => {
     expect(component).toBeTruthy();
   });
-  // it('check if title has min length of 5', () => {
-  //   let checkMinLength = component.bookForm["_directives"][1]["_rawValidators"][1].minlength
-  //   fixture.detectChanges();
-  //   expect(checkMinLength).toBe("5");
-  // });
+  it('check if title has min length of 5', () => {
+    let checkMinLength = component.bookForm["_directives"][1]["_rawValidators"][1].minlength
+    fixture.detectChanges();
+    expect(checkMinLength).toBe("5");
+  });
 });

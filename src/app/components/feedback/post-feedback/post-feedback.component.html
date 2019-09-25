@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Feedback Form</h4>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <textarea rows="6" class="form-control" placeholder="Type something to give feedback" name="feedback" [formControl]="feedback" [ngClass]="{ invalid: !feedback.valid && feedback.touched }"></textarea>
+            <span class="help-block" *ngIf="(!feedback.valid && feedback.touched) && feedback.value.length === 0">Enter Feedback</span>
+            <span class="help-block" *ngIf="(!feedback.valid && feedback.touched) && feedback.value.length > 250">Feedback is too long</span>
+            <span class="help-block" *ngIf="(!feedback.valid && feedback.touched) && feedback.value.length < 50 && feedback.value.length != 0">Feedback is too short</span>
+        </div>
+        <div class="form-group">
+            <span class="fa fa-star" [ngClass]="{'checked': rating >= 1 }"></span>
+            <span class="fa fa-star" [ngClass]="{'checked': rating >= 2 }"></span>
+            <span class="fa fa-star" [ngClass]="{'checked': rating >= 3 }"></span>
+            <span class="fa fa-star" [ngClass]="{'checked': rating >= 4 }"></span>
+            <span class="fa fa-star" [ngClass]="{'checked': rating >= 5 }"></span> 
+            {{ rating }}/5
+        </div>
+        <button class="btn btn-dark mt-2" (click)="postComment()" [disabled]="!feedback.valid">Post Feedback</button>
+        <button class="btn btn-danger mt-2 ml-2" [disabled]="feedback.value.length === 0" (click)="clear()">Clear</button>
+    </div>
+</div>

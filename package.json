@@ -37,6 +37,8 @@
     "nodemon": "^1.19.2",
     "path": "^0.12.7",
     "popper": "^1.0.1",
+    "random-string": "^0.2.0",
+    "randomstring": "^1.1.5",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.3",
     "sweetalert2": "^8.17.6",

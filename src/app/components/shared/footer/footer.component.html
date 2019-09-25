@@ -1,7 +1,6 @@
 <footer class="page-footer dark">
-
-    <div class="footer-text">© 2019 Copyright:
-      <a>EPAM - Library App</a>
-    </div>
-  
-  </footer>
+  <div class="footer-text">© 2019 Copyright:
+    <a>EPAM - Library App</a>
+    <a class="ml-2" *ngIf="userLoginStatus" [routerLink]="['/feedback']" routerLinkActive="router-link-active">Leave feedback for the website</a>
+  </div>
+</footer>

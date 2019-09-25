@@ -2,7 +2,7 @@
   <div class="container">
     <h2 class="text-center text-color">{{reservation.MY_RESERVATIONS}}</h2>
     <div *ngFor="let books of books" class="row">
-      <div class="card col-12 col-md-12 col-lg-8 col-xl-10 " >
+      <div class="card col-12 col-md-12 col-lg-8 col-xl-10 ">
         <div class="card-body ">
           <div class="row align-items-center h-100">
             <div class="col-sm-8 col-md-6 col-lg-2 col-xl-3 align-self-center">
@@ -15,32 +15,31 @@
           </div>
         </div>
       </div>
-      <div class="card col-12 col-md-12 col-lg-3 col-xl-2 padding-0" >
+      <div class="card col-12 col-md-12 col-lg-3 col-xl-2 padding-0">
         <ul class="list-group list-group-flush">
           <li class="list-group-item text-black-50 border-0 list">
             {{reservation.ISBN_NUMBER + reservation.SPACE}}
             <p class="text-dark">{{books.isbn}}</p>
           </li>
           <li class="list-group-item text-black-50 border-0 list">
-            {{reservation.AUTHOR_NAME + reservation.SPACE}}<p
-              class="text-dark">{{books.author}}</p>
+            {{reservation.AUTHOR_NAME + reservation.SPACE}}<p class="text-dark">{{books.author}}</p>
           </li>
           <li class="list-group-item text-black-50 border-0 list">
-            {{reservation.RELEASE_YEAR + reservation.SPACE}}<p
-              class="text-dark">{{books.year}}</p>
+            {{reservation.RELEASE_YEAR + reservation.SPACE}}<p class="text-dark">{{books.year}}</p>
           </li>
           <li class="list-group-item text-black-50 border-0 list">
-            {{reservation.ISSUE_DATE + reservation.SPACE}}<p
-              class="text-dark">{{books.rentedBy[books.currentUserIndex].startDate | date}}</p>
+            {{reservation.ISSUE_DATE + reservation.SPACE}}<p class="text-dark">
+              {{books.rentedBy[books.currentUserIndex].startDate | date}}</p>
           </li>
           <li class="list-group-item text-black-50 border-0 list">
-            {{reservation.RETURN_DATE + reservation.SPACE}}<p
-              class="text-dark">{{getReturnDate(books.rentedBy[books.currentUserIndex].startDate , books.rentedBy[books.currentUserIndex].daysToRent) | date}}</p>
+            {{reservation.RETURN_DATE + reservation.SPACE}}<p class="text-dark">
+              {{getReturnDate(books.rentedBy[books.currentUserIndex].startDate , books.rentedBy[books.currentUserIndex].daysToRent) | date}}
+            </p>
           </li>
         </ul>
         <div>
           <button (click)="confirmationPopUp(books._id)"
-            class="btn right-margin bg-dark text-white w-100" >{{reservation.RETURN_BOOK}}</button>
+            class="btn right-margin bg-dark text-white w-100">{{reservation.RETURN_BOOK}}</button>
         </div>
       </div>
       <br>

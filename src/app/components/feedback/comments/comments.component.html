@@ -1,0 +1,11 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Feedback from other folks</h4>
+    </div>
+    <div class="card-body comments-card">
+        <div class="d-flex justify-content-center vertical-align-middle" *ngIf="showLoader">
+            <app-loader></app-loader>
+        </div>
+        <app-comment-item *ngFor="let comment of comments" [comment]="comment"></app-comment-item>
+    </div>
+</div>

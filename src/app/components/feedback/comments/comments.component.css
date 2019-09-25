@@ -1,0 +1,9 @@
+.comments-card {
+    height: 18.70rem;
+    max-height: 18.70rem;
+    overflow-y: scroll;
+}
+
+.vertical-align-middle {
+    margin-top: 5.8rem;
+}

@@ -8,8 +8,9 @@ import { ReservebookComponent } from './components/Reservation/reservebook/reser
 import { AuthGuard } from './services/auth-guard.service';
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { NotificationComponent } from './components/notification/notification.component';
-import { Test1Component } from './components/test1/test1.component';
 import { HistoryComponent } from './components/history/history.component';
+import { ForgetPasswordComponent } from './components/authentication/forget-password/forget-password.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
 
 const routes: Routes = [
   {
@@ -38,12 +39,12 @@ const routes: Routes = [
   },
   { path: 'reserveDashboard', component: ReservationDashboardComponent },
   { path: 'reserveBook', component: ReservebookComponent },
-  { 
+  {
     path: 'reserveDashboard', 
     component: ReservationDashboardComponent,
     canActivate: [ AuthGuard ]
   },
-  { 
+  {
     path: 'reserveBook', 
     component: ReservebookComponent,
     canActivate: [ AuthGuard ]
@@ -53,17 +54,28 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [ AuthGuard ]
   },
-  { 
+  {
     path: 'dashboard',
     component: SearchComponent,
     canActivate: [ AuthGuard ]
   },
-  { path:'n', 
+  {
+    path:'n', 
     component:NotificationComponent,
     canActivate: [ AuthGuard ]
   },
-  { path:'notification', 
+  {
+    path:'notification', 
     component: HistoryComponent,
+    canActivate: [ AuthGuard ]
+  },
+  {
+    path: 'reset-password',
+    component: ForgetPasswordComponent
+  },
+  {
+    path: 'feedback',
+    component: FeedbackComponent,
     canActivate: [ AuthGuard ]
   }
 ];

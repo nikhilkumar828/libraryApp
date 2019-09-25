@@ -4,7 +4,6 @@ import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotificationComponent } from './components/notification/notification.component';
-import { Test1Component } from './components/test1/test1.component';
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { SearchService } from './components/dashboard/search.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -23,7 +22,13 @@ import { ConfirmationDialogComponent } from './components/shared/confirmation-di
 import { HistoryComponent } from './components/history/history.component';
 import { LoaderComponent } from './components/dashboard/loader/loader.component';
 import { ImageComponent } from './components/shared/image/image.component';
- 
+import { ForgetPasswordComponent } from './components/authentication/forget-password/forget-password.component';
+import { DropdownDirective } from './directives/dropdown.directive';
+import { FeedbackComponent } from './components/feedback/feedback.component';
+import { PostFeedbackComponent } from './components/feedback/post-feedback/post-feedback.component';
+import { CommentsComponent } from './components/feedback/comments/comments.component';
+import { CommentItemComponent } from './components/feedback/comments/comment-item/comment-item.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,12 +41,17 @@ import { ImageComponent } from './components/shared/image/image.component';
     ReservebookComponent,
     AddbookComponent,
     NotificationComponent,
-    Test1Component,
     FooterComponent,
     ConfirmationDialogComponent,
     HistoryComponent,
     LoaderComponent,
-    ImageComponent
+    ImageComponent,
+    ForgetPasswordComponent,
+    DropdownDirective,
+    FeedbackComponent,
+    PostFeedbackComponent,
+    CommentsComponent,
+    CommentItemComponent
   ],
   imports: [
     BrowserModule,

@@ -9,4 +9,17 @@ describe('SearchService', () => {
     const service: SearchService = TestBed.get(SearchService);
     expect(service).toBeTruthy();
   });
+
+  it('isLoading should be false initially', () => {
+    const service: SearchService = TestBed.get(SearchService);
+    expect(service.isLoading).toEqual(false);
+  });
+  it('isNewData should be false initially', () => {
+    const service: SearchService = TestBed.get(SearchService);
+    expect(service.isNewData).toEqual(false);
+  });
+  it('resetResult should be false initially', () => {
+    const service: SearchService = TestBed.get(SearchService);
+    expect(service.resetResult).toEqual(true);
+  });
 });

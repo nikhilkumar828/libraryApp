@@ -1,0 +1,19 @@
+.invalid { 
+    border: 1px solid red; 
+}
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: red;
+    font-size: .85rem;
+}
+
+.checked {
+    color: orange;
+}
+
+.fa-star {
+    cursor: pointer;
+}

@@ -1,0 +1,11 @@
+.comment-text {
+    font-size: .8rem;
+}
+
+.checked {
+    color: orange;
+}
+
+.stars {
+    margin-bottom: 0px !important;
+}

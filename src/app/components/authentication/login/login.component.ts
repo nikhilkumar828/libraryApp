@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   showError: boolean = false;
   errorData: AlertError;
-  marginTop;
+  marginTop: any;
   pageName: string;
   submitted: boolean = false;
 
@@ -29,16 +29,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      'email': new FormControl("" , [Validators.required, Validators.email]),
-      'password': new FormControl("" , [Validators.required, Validators.minLength(8)]),
+      'email': new FormControl("" , [Validators.required, Validators.email])
     });
 
     if(this.router.url === '/auth/signup') {
       this.loginForm.addControl('firstName',new FormControl("", [ Validators.required, Validators.maxLength(15)]));
       this.loginForm.addControl('lastName',new FormControl("", [Validators.required, Validators.maxLength(15)]));
+      this.loginForm.addControl('password', new FormControl("" , [Validators.required, Validators.minLength(8)]));
       this.pageName = "Sign Up";
     }
     else {
+      this.loginForm.addControl('password', new FormControl("" , [Validators.required]));
       this.loginForm.removeControl('firstName');
       this.loginForm.removeControl('lastName');
       this.pageName = "Login";

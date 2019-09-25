@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
       this.authService.logout();
     }
     if(route.routeConfig.path === "add") 
-      if(this.authService.getLoggedInUser().username !== "admin@epam.com")
+      if(!this.authService.getLoggedInUser().admin)
         return false;
     return this.authService.isLoggedIn();
   }

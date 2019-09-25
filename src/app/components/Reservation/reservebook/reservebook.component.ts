@@ -19,26 +19,39 @@ export class ReservebookComponent implements OnInit {
   returnDate = '';
   issueDate = '';
 
-  constructor(private reservationService: ReservationService , private modal: NgbModal) { }
+  /**
+   * Creates an instance of reservebook component.
+   * @param reservationService - Services used for reservations
+   */
+  constructor(private reservationService: ReservationService) {}
+
+  /**
+   * on init
+   * @description - used to subscribe to the book user want to reserve and setting the min issue and return date
+   */
   ngOnInit() {
-    this.reservationService.getBookToReserve().subscribe( (bookObj) => {
+    this.reservationService.getBookToReserve().subscribe(bookObj => {
       this.books.push(bookObj);
     });
     this.issueMinDate = new Date(
       this.myDate.getFullYear(),
       this.myDate.getMonth(),
-      this.myDate.getDate());
+      this.myDate.getDate()
+    );
     this.returnMinDate = new Date(
       this.myDate.getFullYear(),
       this.myDate.getMonth(),
-      this.myDate.getDate());
-    // this.books = this.reservationService.getReservedBooks('user1');
-    console.log('consructor');
-    console.log(this.books);
+      this.myDate.getDate()
+    );
   }
+
+  /**
+   * Sets issue date
+   * @param event - selected issuedate
+   * @description - takes  the selected issue date and calculates validation for return date and sets its issue date
+   */
   setIssueDate(event: any) {
     this.returnMinDate = event;
-    console.log('event');
 
     this.returnMaxDate = new Date(
       event.getFullYear(),
@@ -49,17 +62,21 @@ export class ReservebookComponent implements OnInit {
     this.books[0].issueDate = event;
   }
 
+  /**
+   * Sets return date
+   * @param event - selected returndate
+   * @description - sets the return date of the book
+   */
   setReturnDate(event: any) {
     // this.reservationService.books[0].returnDate = event.getMonth() + 1 + '/' + event.getDate() + '/' + event.getFullYear();
     this.books[0].returnDate = event;
   }
 
+  /**
+   * Reserves book
+   * @description - service call to reserve the book
+   */
   reserveBook() {
-    console.log('book reserved');
-    console.log(this.books);
-    // alert('Book Reserved.');
     this.reservationService.reserveBookCall(this.books);
-    this.reservationService.sendEmail(this.books);
   }
-
 }

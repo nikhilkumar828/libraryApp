@@ -8,7 +8,7 @@
         <div class="card mt-5">
             <div class="card-body">
                 <h5 class="text-center">{{ pageName }} to continue</h5> 
-                <form class="margin-form" [formGroup]="loginForm"  (ngSubmit)="login()">
+                <form class="margin-form" [formGroup]="loginForm" (ngSubmit)="login()">
                     <div class="form-group mb-3" *ngIf="pageName==='Sign Up'">
                         <div class="input-group">
                             <div class="input-group-append">
@@ -124,7 +124,7 @@
                         </span>
                         <span 
                             class="help-block" 
-                            *ngIf="loginForm.get('password').value !== '' && loginForm.get('password').value.length < 8">
+                            *ngIf="loginForm.get('password').value !== '' && loginForm.get('password').value.length < 8 && pageName === 'Sign Up'">
                             Password length should be 8 or greater
                         </span>
                     </div>
@@ -139,7 +139,7 @@
                         <span>
                             Forgot
                         </span>
-                        <a href="#">
+                        <a href="#" [routerLink]="['/reset-password']">
                             Password?
                         </a>
                     </div>

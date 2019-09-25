@@ -51,7 +51,7 @@
               placeholder="ISBN" ngModel #isbn="ngModel">
             <div *ngIf="isbn.invalid && isbn.touched ">
               <div *ngIf="isbn.errors.pattern">
-                <small class="text-danger">ISBN not valid.</small>
+                <small class="text-danger">ISBN of only 13 digits is valid.</small>
               </div>
               <small class="text-danger" *ngIf="isbn.errors?.required">*ISBN Number is a must</small>
             </div>

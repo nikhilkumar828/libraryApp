@@ -28,8 +28,8 @@
 }
 
 .navbar {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: .5rem !important;
+    padding-bottom: .5rem !important;
 }
 
 .active {
@@ -60,6 +60,7 @@
 }
 
 .dropdown-menu {
+    margin: 0;
     padding: 0;
     overflow: hidden;
     user-select: none;
@@ -76,6 +77,15 @@
 .fa-2x {
     font-size: 1.75em;
 }
+.badge {
+    position: absolute;
+    margin: 0 auto;
+    padding: 3px 6px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size:10px;
+  }
 
 .nav-link:hover {
     color: #76cdd8 !important;

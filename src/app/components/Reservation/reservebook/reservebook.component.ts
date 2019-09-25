@@ -51,9 +51,6 @@ export class ReservebookComponent implements OnInit {
     );
     }
   }
-
-
-
   /**
    * Sets return date
    * @param event - selected returndate

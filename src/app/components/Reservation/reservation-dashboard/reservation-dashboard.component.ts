@@ -99,7 +99,13 @@ export class ReservationDashboardComponent implements OnInit {
    */
   getReturnDate(Issuedate: any, noOfDays: number) {
     const date = new Date(Issuedate);
+    const presentDate=new Date();
     date.setDate(date.getDate() + noOfDays);
+    if(date>presentDate){
     return date;
+    }
+    else{
+      return presentDate;
+    }
   }
 }
